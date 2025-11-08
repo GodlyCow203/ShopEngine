@@ -1,0 +1,30 @@
+# Mineral Items
+coal:
+  material: COAL
+  display-name: "<dark_gray>Coal"
+  slot: 0
+  amount: 32
+  buy-price: 15.0
+  sell-price: 7.5
+  stock: -1
+
+iron_ingot:
+  material: IRON_INGOT
+  display-name: "<white>Iron Ingot"
+  slot: 1
+  amount: 16
+  buy-price: 30.0
+  sell-price: 15.0
+  stock: -1
+
+diamond:
+  material: DIAMOND
+  display-name: "<aqua>💎 Diamond 💎"
+  slot: 2
+  amount: 1
+  buy-price: 100.0
+  sell-price: 50.0
+  stock: 32
+  lore:
+    - "<yellow>• Extremely valuable"
+    - "<yellow>• High demand item"

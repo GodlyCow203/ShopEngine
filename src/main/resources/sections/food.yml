@@ -1,0 +1,5 @@
+# Food Section
+display-name: "<gradient:#ff6347:#ff0000>Food & Farming</gradient>"
+icon: BREAD
+slot: 14
+# Items are linked from items/food.yml

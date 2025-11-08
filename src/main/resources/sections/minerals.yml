@@ -1,0 +1,5 @@
+# Minerals Section
+display-name: "<gradient:#ffd700:#ffed4e>Minerals & Ores</gradient>"
+icon: DIAMOND
+slot: 12
+# Items are linked from items/minerals.yml

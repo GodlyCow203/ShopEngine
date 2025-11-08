@@ -1,0 +1,5 @@
+# Building Blocks Section
+display-name: "<gradient:#32a852:#3ddc84>Building Blocks</gradient>"
+icon: GRASS_BLOCK
+slot: 10
+# Items are linked from items/blocks.yml

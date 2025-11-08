@@ -1,0 +1,63 @@
+name: ShopEngine
+version: 1.0.0
+main: net.godlycow.org.shopengine.ShopEngine
+api-version: '1.20'
+author: YourName
+description: A modern shop GUI plugin with dynamic pricing and Vault integration
+softdepend:
+  - Vault
+
+commands:
+  shop:
+    description: Open the shop GUI
+    usage: /shop [reload|resetprice|balance|help]
+    aliases: [shopengine, se]
+    permission: shopengine.use
+
+
+permissions:
+  shopengine.use:
+    description: Allows using the shop
+    default: true
+
+  shopengine.balance:
+    description: Allows checking balance
+    default: true
+
+  shopengine.reload:
+    description: Allows reloading all plugin data
+    default: op
+
+  shopengine.reload.config:
+    description: Allows reloading config only
+    default: op
+
+  shopengine.reload.messages:
+    description: Allows reloading messages only
+    default: op
+
+  shopengine.reload.sections:
+    description: Allows reloading sections only
+    default: op
+
+  shopengine.reload.items:
+    description: Allows reloading items only
+    default: op
+
+  shopengine.resetprice:
+    description: Allows resetting dynamic prices
+    default: op
+  shopengine.history:
+    description: View transaction history
+    default: true
+  shopengine.search:
+    description: Use sign-based search
+    default: true
+
+  shopengine.admin:
+    description: All admin permissions
+    default: op
+    children:
+      shopengine.reload.*: true
+      shopengine.resetprice: true
+      shopengine.search: true

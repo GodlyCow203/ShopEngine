@@ -1,0 +1,443 @@
+# ===================================================================
+# ShopEngine - Complete Configuration Guide
+# ===================================================================
+# This file explains every configuration option in detail
+# Placeholders: <value> = replace with your value (without brackets)
+
+# ===================================================================
+# 1. SHOP SECTIONS
+# ===================================================================
+
+# Shop sections are categories like "Blocks", "Food", etc.
+# Location: plugins/ShopEngine/sections/<name>.yml
+
+section_example:
+  display-name: "<green>My Section"
+  icon: "DIAMOND"  # Material name from https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+  slot: 10  # Slot in GUI (0-53)
+  page: 1   # Page number (1 = first page, 2 = second page, etc.)
+
+# === SECTION KEY EXPLANATIONS ===
+# display-name: The name shown in the GUI. Supports MiniMessage formatting (colors, gradients)
+# icon: The item material displayed as the section icon
+# slot: Inventory slot position (0-53). First row = 0-8, second row = 9-17, etc.
+# page: Which page this section appears on. Use pages when you have too many sections
+
+# === SECTION EXAMPLES ===
+
+# Example 1: Basic Block Section (appears on page 1)
+blocks:
+  display-name: "<#8B4513>Blocks"
+  icon: "STONEBRICKS"
+  slot: 10
+  page: 1
+
+# Example 2: Advanced Items (appears on page 2)
+advanced:
+  display-name: "<gradient:#ff0000:#ffff00>Legendary Items"
+  icon: "NETHER_STAR"
+  slot: 15
+  page: 2
+
+# ===================================================================
+# 2. SHOP ITEMS
+# ===================================================================
+
+# Shop items are the actual items players can buy/sell
+# Location: plugins/ShopEngine/items/<name>.yml
+
+item_example:
+  material: "DIAMOND"
+  display-name: "<blue>Shiny Diamond"  # Optional, if empty uses material name
+  slot: 20
+  page: 1
+  amount: 1
+  buy-price: 100.0  # Set to -1 to disable buying
+  sell-price: 50.0   # Set to -1 to disable selling
+  stock: 10          # Set to -1 for unlimited stock
+  custom-model-data: -1  # Optional: Set to number > 0 for custom textures
+  lore:
+    - "<gray>This is a special diamond"
+    - "<yellow>Very valuable!"
+
+# === ITEM KEY EXPLANATIONS ===
+# material: Bukkit Material enum (required) - https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+# display-name: Custom display name. If empty or missing, uses formatted material name
+# slot: Position in section GUI (0-53, but stay away from navigation slots 45-53)
+# page: Which page this item appears on (1-based)
+# amount: How many items per transaction
+# buy-price: Price to buy one item (-1 = cannot buy)
+# sell-price: Price when selling one item (-1 = cannot sell)
+# stock: Max initial stock (-1 = unlimited). When players sell, stock increases. When they buy, it decreases
+# custom-model-data: Resource pack model ID (-1 = none, any positive number = custom model)
+# lore: List of lore lines. Supports MiniMessage formatting
+
+# === ITEM EXAMPLES ===
+
+# Example 1: Basic buy-only item
+dirt:
+  material: "DIRT"
+  display-name: "Dirt Block"
+  slot: 10
+  page: 1
+  amount: 64
+  buy-price: 10.0
+  sell-price: -1  # Cannot sell
+  stock: -1       # Unlimited
+  lore: []
+
+# Example 2: Sell-only item
+cobblestone:
+  material: "COBBLESTONE"
+  display-name: "<gray>Cobblestone"
+  slot: 11
+  page: 1
+  amount: 1
+  buy-price: -1    # Cannot buy
+  sell-price: 0.5
+  stock: -1        # Unlimited
+  lore:
+    - "<gray>Just cobblestone..."
+
+# Example 3: Limited stock rare item
+dragon_egg:
+  material: "DRAGON_EGG"
+  display-name: "<gradient:#ff00ff:#ffff00>Dragon Egg"
+  slot: 22
+  page: 1
+  amount: 1
+  buy-price: 100000.0
+  sell-price: 50000.0
+  stock: 1         # Only 1 available until someone sells it back
+  custom-model-data: 1
+  lore:
+    - "<red>Extremely rare!"
+    - "<gray>Only one available"
+
+# Example 4: Multi-page shop item
+coal_page2:
+  material: "COAL"
+  display-name: "Coal (Page 2)"
+  slot: 10
+  page: 2          # Appears on page 2
+  amount: 32
+  buy-price: 50.0
+  sell-price: 25.0
+  stock: 100
+
+# ===================================================================
+# 3. DYNAMIC PRICING
+# ===================================================================
+
+# Dynamic pricing adjusts prices based on supply/demand
+# Location: plugins/ShopEngine/config.yml
+
+dynamic-pricing:
+  enabled: true
+  daily-fluctuation-percent: 5.0  # How much price changes per transaction (percentage)
+  save-interval-minutes: 10       # How often to save prices to disk
+
+# === HOW IT WORKS ===
+# - When a player BUYS an item, the price INCREASES (more demand)
+# - When a player SELLS an item, the price DECREASES (more supply)
+# - Price multiplier is limited between 0.1x and 3.0x original price
+
+# === EXAMPLE SCENARIO ===
+# 1. Diamond has buy-price: 100.0
+# 2. Player buys 10 diamonds → price increases by 5% × 10 = 50% increase
+# 3. New price = 100 × 1.5 = 150.0
+# 4. Later, players sell diamonds → price decreases back toward 100.0
+
+# ===================================================================
+# 4. MESSAGES CUSTOMIZATION
+# ===================================================================
+
+# Location: plugins/ShopEngine/shopmessages.yml
+
+# ShopEngine Messages
+# MiniMessage formatting: https://docs.advntr.dev/minimessage/format.html
+
+# Core
+prefix: <gray>[<gradient:#00F58C:#00E0FF>ShopEngine</gradient>]</gray>
+no-permission: <#FF5555>⛔ You don’t have permission to perform this action.
+player-only: <#FF5555>⛔ This command can only be executed by players.
+
+# Economy
+economy:
+  not-enough-money: '<#FF5555>❌ Insufficient funds! <gray>(Need: <#FFD36B>$<amount></#FFD36B>)'
+  balance: '<#6BFF92>💰 Balance: <#FFD36B>$<balance>'
+  transaction-failed: <#FF5555>⚠ Transaction failed — contact an administrator.
+
+# Shop
+shop:
+  cannot-buy: <#FF5555>❌ You can’t purchase this item.
+  cannot-sell: <#FF5555>❌ You can’t sell this item.
+  not-enough-stock: '<#FF5555>⚠ Not enough stock! <gray>(Available: <#FFEA52><current></#FFEA52>)'
+  inventory-full: <#FF5555>⚠ Your inventory is full.
+  not-enough-items: '<#FF5555>⚠ You don’t have enough items. <gray>(You have: <white><amount></white>)'
+  purchase-success: <#6BFF92>✅ Purchased <white><amount>x <item></white> for <#FFD36B>$<price></#FFD36B>!
+  sell-success: <#6BFF92>✅ Sold <white><amount>x <item></white> for <#FFD36B>$<price></#FFD36B>!
+  search-prompt: <#FFD36B>🔎 Type your search term and press ENTER.
+  search-cancel: <gray>Type '<white>cancel</white>' to exit search mode.
+  search-cancelled: <#FF5555>❌ Search cancelled.
+  search-starting: <#6BFF92>🔎 Searching for '<white><term></white>'...
+  search-no-results: <#FF5555>❌ No items found matching '<white><term></white>'.
+
+# Dynamic Pricing
+dynamic-prices:
+  high: <#FFD36B>▲ Prices are currently above average.
+  low: <#00D9FF>▼ Prices are currently below average.
+
+# GUI Lore
+gui:
+  titles:
+    main-shop: <gradient:#00F58C:#00E0FF>Shop</gradient>
+    section: <section>
+
+  lore:
+    click-to-view: <gray>▶ Click to browse.
+    your-balance: '<gray>Balance: <#FFD36B>$<balance>'
+    buy-price: '<#6BFF92>Buy: <white>$<price>'
+    sell-price: '<#FF6B6B>Sell: <white>$<price>'
+    stock: '<gray>Stock: <#FFEA52><current>'
+    back-title: <#FF5555>← Back
+    back-button: <gray>Return to main menu.
+    filler: <gray>•
+    left-click-buy: <#FFD36B>• Left-Click <gray>→ Buy 1
+    right-click-sell: <#FFD36B>• Right-Click <gray>→ Sell 1
+    shift-left-buy: <#FFD36B>• Shift-Left <gray>→ Buy 64
+    shift-right-sell: <#FFD36B>• Shift-Right <gray>→ Sell All
+
+  search:
+    title: '<gradient:#00F58C:#00E0FF>Search: ''<term>''</gradient>'
+    search-again: <#FFD36B>🔎 New Search
+    search-lore: <gray>Click to search for different items.
+    close: <#FF5555>✕ Close Results
+    previous: <#FFD36B>← Previous Page
+    next: <#FFD36B>Next Page →
+    sign-title: <#FFD36B>🔎 Search Shop
+    sign-lore: <gray>Search across all categories.
+    click-to-buy: '<#6BFF92>Buy: <white>$<price>'
+    click-to-sel: '<#FF6B6B>Sell: <white>$<price>'
+
+    left-click-buy: <#FFD36B>• Left-Click <gray>→ Buy 1
+    right-click-sell: <#FFD36B>• Right-Click <gray>→ Sell 1
+    shift-left-buy: <#FFD36B>• Shift-Left <gray>→ Buy 64
+    shift-right-sell: <#FFD36B>• Shift-Right <gray>→ Sell All
+
+  navigation:
+    previous: <#FFD36B>← Previous Page
+    previous-lore: <gray>Go to page <#FFEA52><page>
+    next: <#FFD36B>Next Page →
+    next-lore: <gray>Go to page <#FFEA52><page>
+    page-info: <#FFD36B>Page <#FFEA52><current> <#FFD36B>of <#FFEA52><total>
+    no-previous: <gray>← No previous page
+    no-next: <gray>No next page →
+
+  history:
+    title: <gradient:#00F58C:#00E0FF>Transaction History</gradient>
+    no-transactions: <#FF5555>❌ No transactions found.
+    previous-page: <#FFD36B>← Previous Page
+    next-page: <#FFD36B>Next Page →
+    page-info: <gray>Page <#FFEA52><current></gray>/<#FFEA52><total>
+    close: <#FF5555>✕ Close
+    close-lore: <gray>Return to shop.
+    statistics: <#FFD36B><bold>Statistics</bold>
+    recent-activity: <gray>Recent activity
+    total-transactions: '<gray>Total: <#FFEA52><count>'
+    purchases-count: '<#6BFF92>✓ Purchases: <#FFEA52><count>'
+    sales-count: '<#FF6B6B>✗ Sales: <#FFEA52><count>'
+
+# Commands
+commands:
+  reload-success: <#6BFF92>✅ ShopEngine configuration reloaded.
+  reload-config: <#6BFF92>Config reloaded.
+  reload-messages: <#6BFF92>Messages reloaded.
+  reload-sections: <#6BFF92>Sections reloaded.
+  reload-items: <#6BFF92>Items reloaded.
+  reload-unknown: '<#FF5555>⚠ Unknown target. Use: <white>all | config | messages
+    | sections | items'
+
+  resetprice-success: <#6BFF92>🔄 Dynamic price reset for <white><item></white>.
+  resetprice-usage: '<#FF5555>⚠ Usage: /shop resetprice <item-key>'
+
+  help:
+    header: <#FFD36B><bold>ShopEngine Commands</bold>
+    shop: <#FFD36B>/shop <gray>→ Open shop.
+    balance: <#FFD36B>/shop balance <gray>→ View balance.
+    reload: <#FFD36B>/shop reload <all|config|messages|sections|items> <gray>→ Reload
+      config.
+    resetprice: <#FFD36B>/shop resetprice <item> <gray>→ Reset price.
+    help: <#FFD36B>/shop help <gray>→ Show help.
+    history: <#FFD36B>/shop history <gray>→ View transaction history.
+    search: <#FFD36B>/shop search <gray>→ Search items.
+
+  unknown: '<#FF5555>⚠ Unknown command. Use: <white>/shop help</white>.'
+
+  history:
+    usage: '<#FF5555>⚠ Usage: /shop history'
+    no-data: <gray>No transaction history found.
+    no-permission: <#FF5555>⛔ You don’t have permission to view history.
+
+# ===================================================================
+# 5. COMMAND REFERENCE
+# ===================================================================
+
+# /shop - Opens the shop GUI
+# /shopadmin reload - Reloads all configs
+# /shopadmin resetprices - Resets all dynamic prices to 1.0x
+
+# ===================================================================
+# 6. SETUP GUIDE
+# ===================================================================
+
+# STEP 1: Create sections
+#   - Go to plugins/ShopEngine/sections/
+#   - Create .yml files (e.g., blocks.yml, weapons.yml)
+#   - Each file = one section/category
+
+# STEP 2: Add items to sections
+#   - Go to plugins/ShopEngine/items/
+#   - Create .yml files with the SAME name as your section (blocks.yml, weapons.yml)
+#   - Each key under the file is one item
+
+# STEP 3: Configure economy
+#   - Install Vault + an economy plugin (EssentialsX, CMI, etc.)
+#   - No config needed - ShopEngine auto-detects Vault
+
+# STEP 4: Start server and test!
+
+# ===================================================================
+# 7. TROUBLESHOOTING
+# ===================================================================
+
+# Problem: Items not showing in GUI
+# Solution: Check that slot and page values are correct (0-53, page 1 or 2)
+#           Make sure item .yml filename matches section .yml filename
+
+# Problem: Prices not changing dynamically
+# Solution: Ensure dynamic-pricing.enabled: true in config.yml
+#           Check that you're using the latest plugin version
+
+# Problem: Stock shows -1 (unlimited) when you set a number
+# Solution: Check your .yml file format - stock should be unquoted number (10, not "10")
+#           Run /shopadmin reload after changes
+
+# Problem: Can't buy/sell items
+# Solution: Check buy-price and sell-price are not -1 (if they're -1, that action is disabled)
+#           Check if stock is empty (> 0 means limited stock, -1 = unlimited)
+
+# Problem: Custom textures not working
+# Solution: Ensure custom-model-data is a positive number (> 0)
+#           Your resource pack must have the model at that ID
+
+# Problem: Messages not formatting correctly
+# Solution: Wrap messages in quotes if they contain ':' or special characters
+#           Use valid MiniMessage format: https://docs.advntr.dev/minimessage/format.html
+
+# ===================================================================
+# 8. MINIMESSAGE QUICK REFERENCE
+# ===================================================================
+
+# <red>, <green>, <blue>, <yellow>, etc. - Basic colors
+# <#ff0000> - Hex color
+# <bold>, <italic>, <underlined> - Text styles
+# <gradient:#ff0000:#00ff00> - Gradient text
+# <rainbow> - Rainbow effect (animated in-game)
+# <reset> - Reset all formatting
+
+# Example: "<gradient:#ff0000:#ffff00><bold>Legendary Sword<reset>"
+
+# ===================================================================
+# 9. BEST PRACTICES
+# ===================================================================
+
+# 1. Slot Planning:
+#    - Main shop GUI (sections): Use slots 0-44 only
+#    - Section GUI (items): Use slots 0-44 only
+#    - Navigation uses slots 45-53
+
+# 2. Pricing Strategy:
+#    - Set buy-price ~2x higher than sell-price for profit
+#    - Use stock limits for rare items
+#    - Enable dynamic pricing for high-volume items
+
+# 3. Performance:
+#    - Don't create more than 5-6 pages (performance impact)
+#    - Use /shopengine reload after config changes (no restart needed)
+
+# 4. Testing:
+#    - Test with default configs first
+#    - Use "/shopengine resetprices <item_key>" between tests to reset dynamic prices
+#    - Check console for errors if GUI doesn't open
+
+# ===================================================================
+# 10. COMPLETE EXAMPLE - FARMING SHOP
+# ===================================================================
+
+# File: plugins/ShopEngine/sections/farming.yml
+display-name: "<green><bold>FARMING"
+icon: "WHEAT"
+slot: 10
+page: 1
+
+# File: plugins/ShopEngine/items/farming.yml
+seeds:
+  material: "WHEAT_SEEDS"
+  display-name: "<yellow>Wheat Seeds"
+  slot: 10
+  page: 1
+  amount: 16
+  buy-price: 2.0
+  sell-price: 1.0
+  stock: -1
+  lore:
+    - "<gray>Essential for farming!"
+
+carrots:
+  material: "CARROT"
+  display-name: "<orange>Carrots"
+  slot: 11
+  page: 1
+  amount: 32
+  buy-price: 4.0
+  sell-price: 2.0
+  stock: 500
+  lore:
+    - "<gray>Healthy and delicious!"
+    - "<gold>Sell price fluctuates!"
+
+golden_apple:
+  material: "GOLDEN_APPLE"
+  display-name: "<gradient:#ffff00:#ff8800>Sacred Apple"
+  slot: 22
+  page: 1
+  amount: 1
+  buy-price: 1000.0
+  sell-price: 500.0
+  stock: 3
+  custom-model-data: 100
+  lore:
+    - "<red>✦ Extremely Rare ✦"
+    - "<gray>Restores full health"
+    - "<yellow>Limited stock!"
+
+# ===================================================================
+# ⚠️ SECURITY WARNING - DO NOT EDIT THESE FILES MANUALLY
+# ===================================================================
+
+# DANGER: Never manually edit these files while the server is running!
+# They contain live data and will be overwritten by the plugin.
+# If you must edit them, stop the server first, make a backup, then edit.
+
+protected-files:
+  - "plugins/ShopEngine/playerdata/"      # Contains player transaction history
+  - "plugins/ShopEngine/dynamic-prices.yml"  # Contains live price multipliers
+
+# Why not to edit:
+# playerdata/: Stores real-time player transaction data. Editing can corrupt player records
+# dynamic-prices.yml: Updated every 10 minutes by the plugin. Manual changes will be lost
+
+# If you need to reset prices: Use /shopengine resetprices (in-game command)
+# If you need to edit player data: Stop server, backup, edit, restart
+# ===================================================================

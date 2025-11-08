@@ -1,0 +1,24 @@
+# ShopEngine Core Configuration
+# For messages: see shopmessages.yml
+# For sections: see /sections/ folder
+# For items: see /items/ folder
+
+# Dynamic Pricing Settings
+dynamic-pricing:
+  enabled: true
+  daily-fluctuation-percent: 5.0  # How much prices can change daily
+  save-interval-minutes: 10       # How often to save price data
+
+# Economy Settings
+economy:
+  format: "$<amount>"  # Customize currency format
+  use-vault: true      # Enable Vault integration
+
+# GUI Settings
+gui:
+  sound-effects:
+    enabled: true
+    open: BLOCK_CHEST_OPEN
+    click: UI_BUTTON_CLICK
+    buy: ENTITY_EXPERIENCE_ORB_PICKUP
+    sell: ENTITY_ITEM_PICKUP
