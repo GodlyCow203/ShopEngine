@@ -1,34 +1,45 @@
-# Page 1 - Core Building Blocks
+# Page 1 - Basic Earth & Stone
 stone:
   material: STONE
   display-name: "<white>Stone"
   slot: 10
-  amount: 64
-  buy-price: 10.0
-  sell-price: 5.0
-  page: 1
-  stock: -1
-  lore:
-    - "<gray>Basic building material"
-    - "<gray>Essential for any builder"
-
-cobblestone:
-  material: COBBLESTONE
-  display-name: "<gray>Cobblestone"
-  slot: 11
-  amount: 64
+  amount: 1
   buy-price: 8.0
   sell-price: 4.0
   page: 1
   stock: -1
   lore:
-    - "<gray>Classic rugged stone"
+    - "<gray>Basic building material"
+
+cobblestone:
+  material: COBBLESTONE
+  display-name: "<gray>Cobblestone"
+  slot: 11
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+  lore:
+    - "<gray>Cheap and abundant"
+
+mossy_cobblestone:
+  material: MOSSY_COBBLESTONE
+  display-name: "<#556B2F>Mossy Cobblestone"
+  slot: 12
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 1
+  stock: -1
+  lore:
+    - "<gray>Aged stone with moss"
 
 dirt:
   material: DIRT
   display-name: "<#8B4513>Dirt"
-  slot: 12
-  amount: 64
+  slot: 13
+  amount: 1
   buy-price: 4.0
   sell-price: 2.0
   page: 1
@@ -39,228 +50,345 @@ dirt:
 grass_block:
   material: GRASS_BLOCK
   display-name: "<green>Grass Block"
-  slot: 13
-  amount: 64
+  slot: 14
+  amount: 1
   buy-price: 6.0
   sell-price: 3.0
   page: 1
   stock: -1
   lore:
-    - "<gray>Bring nature to your build"
+    - "<gray>Bring life to your build"
+
+coarse_dirt:
+  material: COARSE_DIRT
+  display-name: "<#785E4F>Coarse Dirt"
+  slot: 15
+  amount: 1
+  buy-price: 5.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+
+rooted_dirt:
+  material: ROOTED_DIRT
+  display-name: "<#7A5C4C>Rooted Dirt"
+  slot: 16
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+
+podzol:
+  material: PODZOL
+  display-name: "<#4A3728>Podzol"
+  slot: 19
+  amount: 1
+  buy-price: 8.0
+  sell-price: 4.0
+  page: 1
+  stock: -1
+
+mycelium:
+  material: MYCELIUM
+  display-name: "<#6A4C7A>Mycelium"
+  slot: 20
+  amount: 1
+  buy-price: 8.0
+  sell-price: 4.0
+  page: 1
+  stock: -1
+
+farmland:
+  material: FARMLAND
+  display-name: "<#7B5C3C>Farmland"
+  slot: 21
+  amount: 1
+  buy-price: 4.0
+  sell-price: 2.0
+  page: 1
+  stock: -1
 
 sand:
   material: SAND
   display-name: "<yellow>Sand"
-  slot: 14
-  amount: 64
+  slot: 22
+  amount: 1
   buy-price: 6.0
   sell-price: 3.0
   page: 1
   stock: -1
   lore:
-    - "<gray>Perfect for deserts and glass"
+    - "<gray>Perfect for glass"
+
+red_sand:
+  material: RED_SAND
+  display-name: "<#D2691E>Red Sand"
+  slot: 23
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
 
 gravel:
   material: GRAVEL
   display-name: "<gray>Gravel"
-  slot: 15
-  amount: 64
+  slot: 24
+  amount: 1
   buy-price: 6.0
   sell-price: 3.0
   page: 1
   stock: -1
-  lore:
-    - "<gray>Coarse and useful"
 
 clay:
   material: CLAY
   display-name: "<#C3B091>Clay"
-  slot: 16
-  amount: 32
-  buy-price: 12.0
-  sell-price: 6.0
+  slot: 25
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
   page: 1
   stock: -1
   lore:
     - "<gray>Fire it for bricks"
 
-oak_log:
-  material: OAK_LOG
-  display-name: "<#8B4513>Oak Log"
-  slot: 19
-  amount: 16
+terracotta:
+  material: TERRACOTTA
+  display-name: "<#CC7C37>Terracotta"
+  slot: 28
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
+  page: 1
+  stock: -1
+
+mud:
+  material: MUD
+  display-name: "<#3F2A15>Mud"
+  slot: 29
+  amount: 1
+  buy-price: 4.0
+  sell-price: 2.0
+  page: 1
+  stock: -1
+
+packed_mud:
+  material: PACKED_MUD
+  display-name: "<#4A3A28>Packed Mud"
+  slot: 30
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+
+mud_bricks:
+  material: MUD_BRICKS
+  display-name: "<#5B4A32>Mud Bricks"
+  slot: 31
+  amount: 1
+  buy-price: 14.0
+  sell-price: 7.0
+  page: 1
+  stock: -1
+
+snow_block:
+  material: SNOW_BLOCK
+  display-name: "<white>Snow Block"
+  slot: 32
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+
+powder_snow:
+  material: POWDER_SNOW_BUCKET
+  display-name: "<#E0E0E0>Powder Snow"
+  slot: 33
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+
+ice:
+  material: ICE
+  display-name: "<#B0E0E6>Ice"
+  slot: 34
+  amount: 1
   buy-price: 8.0
   sell-price: 4.0
   page: 1
   stock: -1
-  custom-model-data: 1
 
-oak_planks:
-  material: OAK_PLANKS
-  display-name: "<#DEB887>Oak Planks"
-  slot: 20
-  amount: 64
-  buy-price: 10.0
-  sell-price: 5.0
-  page: 1
+# Page 2 - Wood Logs & Bark
+oak_log:
+  material: OAK_LOG
+  display-name: "<#8B4513>Oak Log"
+  slot: 10
+  amount: 1
+  buy-price: 8.0
+  sell-price: 4.0
+  page: 2
   stock: -1
 
 spruce_log:
   material: SPRUCE_LOG
   display-name: "<#3F2A15>Spruce Log"
-  slot: 21
-  amount: 16
+  slot: 11
+  amount: 1
   buy-price: 8.0
   sell-price: 4.0
-  page: 1
-  stock: -1
-
-spruce_planks:
-  material: SPRUCE_PLANKS
-  display-name: "<#8B6914>Spruce Planks"
-  slot: 22
-  amount: 64
-  buy-price: 10.0
-  sell-price: 5.0
-  page: 1
+  page: 2
   stock: -1
 
 birch_log:
   material: BIRCH_LOG
   display-name: "<#F5DEB3>Birch Log"
-  slot: 23
-  amount: 16
+  slot: 12
+  amount: 1
   buy-price: 8.0
   sell-price: 4.0
-  page: 1
-  stock: -1
-
-birch_planks:
-  material: BIRCH_PLANKS
-  display-name: "<#F5F5DC>Birch Planks"
-  slot: 24
-  amount: 64
-  buy-price: 10.0
-  sell-price: 5.0
-  page: 1
+  page: 2
   stock: -1
 
 jungle_log:
   material: JUNGLE_LOG
   display-name: "<#8B7355>Jungle Log"
-  slot: 25
-  amount: 16
+  slot: 13
+  amount: 1
   buy-price: 10.0
   sell-price: 5.0
-  page: 1
-  stock: -1
-
-jungle_planks:
-  material: JUNGLE_PLANKS
-  display-name: "<#A0826D>Jungle Planks"
-  slot: 28
-  amount: 64
-  buy-price: 12.0
-  sell-price: 6.0
-  page: 1
+  page: 2
   stock: -1
 
 acacia_log:
   material: ACACIA_LOG
   display-name: "<#D2691E>Acacia Log"
-  slot: 29
-  amount: 16
+  slot: 14
+  amount: 1
   buy-price: 10.0
   sell-price: 5.0
-  page: 1
-  stock: -1
-
-acacia_planks:
-  material: ACACIA_PLANKS
-  display-name: "<#DEB887>Acacia Planks"
-  slot: 30
-  amount: 64
-  buy-price: 12.0
-  sell-price: 6.0
-  page: 1
+  page: 2
   stock: -1
 
 dark_oak_log:
   material: DARK_OAK_LOG
   display-name: "<#2F1B14>Dark Oak Log"
-  slot: 31
-  amount: 16
+  slot: 15
+  amount: 1
   buy-price: 10.0
   sell-price: 5.0
-  page: 1
-  stock: -1
-
-dark_oak_planks:
-  material: DARK_OAK_PLANKS
-  display-name: "<#4A3C28>Dark Oak Planks"
-  slot: 32
-  amount: 64
-  buy-price: 12.0
-  sell-price: 6.0
-  page: 1
+  page: 2
   stock: -1
 
 mangrove_log:
   material: MANGROVE_LOG
   display-name: "<#8B4A4A>Mangrove Log"
-  slot: 33
-  amount: 16
-  buy-price: 12.0
-  sell-price: 6.0
-  page: 1
-  stock: -1
-
-mangrove_planks:
-  material: MANGROVE_PLANKS
-  display-name: "<#A0826D>Mangrove Planks"
-  slot: 34
-  amount: 64
-  buy-price: 14.0
-  sell-price: 7.0
-  page: 1
-  stock: -1
-
-# Page 2 - Stone Variants & More Wood
-cherry_log:
-  material: CHERRY_LOG
-  display-name: "<#FFB6C1>Cherry Log"
-  slot: 10
-  amount: 16
+  slot: 16
+  amount: 1
   buy-price: 12.0
   sell-price: 6.0
   page: 2
   stock: -1
 
-cherry_planks:
-  material: CHERRY_PLANKS
-  display-name: "<#F5C0C0>Cherry Planks"
-  slot: 11
-  amount: 64
-  buy-price: 14.0
-  sell-price: 7.0
+cherry_log:
+  material: CHERRY_LOG
+  display-name: "<#FFB6C1>Cherry Log"
+  slot: 19
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
   page: 2
   stock: -1
 
 bamboo_block:
   material: BAMBOO_BLOCK
   display-name: "<#E5B87B>Bamboo Block"
-  slot: 12
-  amount: 16
+  slot: 20
+  amount: 1
   buy-price: 10.0
   sell-price: 5.0
   page: 2
   stock: -1
 
-bamboo_planks:
-  material: BAMBOO_PLANKS
-  display-name: "<#F5DEB3>Bamboo Planks"
-  slot: 13
-  amount: 64
+oak_wood:
+  material: OAK_WOOD
+  display-name: "<#8B4513>Oak Wood"
+  slot: 21
+  amount: 1
+  buy-price: 8.0
+  sell-price: 4.0
+  page: 2
+  stock: -1
+
+spruce_wood:
+  material: SPRUCE_WOOD
+  display-name: "<#3F2A15>Spruce Wood"
+  slot: 22
+  amount: 1
+  buy-price: 8.0
+  sell-price: 4.0
+  page: 2
+  stock: -1
+
+birch_wood:
+  material: BIRCH_WOOD
+  display-name: "<#F5DEB3>Birch Wood"
+  slot: 23
+  amount: 1
+  buy-price: 8.0
+  sell-price: 4.0
+  page: 2
+  stock: -1
+
+jungle_wood:
+  material: JUNGLE_WOOD
+  display-name: "<#8B7355>Jungle Wood"
+  slot: 24
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 2
+  stock: -1
+
+acacia_wood:
+  material: ACACIA_WOOD
+  display-name: "<#D2691E>Acacia Wood"
+  slot: 25
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 2
+  stock: -1
+
+dark_oak_wood:
+  material: DARK_OAK_WOOD
+  display-name: "<#2F1B14>Dark Oak Wood"
+  slot: 28
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 2
+  stock: -1
+
+mangrove_wood:
+  material: MANGROVE_WOOD
+  display-name: "<#8B4A4A>Mangrove Wood"
+  slot: 29
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
+  page: 2
+  stock: -1
+
+cherry_wood:
+  material: CHERRY_WOOD
+  display-name: "<#FFB6C1>Cherry Wood"
+  slot: 30
+  amount: 1
   buy-price: 12.0
   sell-price: 6.0
   page: 2
@@ -268,9 +396,9 @@ bamboo_planks:
 
 stripped_oak_log:
   material: STRIPPED_OAK_LOG
-  display-name: "<#D2B48C>Stripped Oak"
-  slot: 14
-  amount: 16
+  display-name: "<#D2B48C>Stripped Oak Log"
+  slot: 31
+  amount: 1
   buy-price: 10.0
   sell-price: 5.0
   page: 2
@@ -278,9 +406,9 @@ stripped_oak_log:
 
 stripped_spruce_log:
   material: STRIPPED_SPRUCE_LOG
-  display-name: "<#C19A6B>Stripped Spruce"
-  slot: 15
-  amount: 16
+  display-name: "<#C19A6B>Stripped Spruce Log"
+  slot: 32
+  amount: 1
   buy-price: 10.0
   sell-price: 5.0
   page: 2
@@ -288,9 +416,9 @@ stripped_spruce_log:
 
 stripped_birch_log:
   material: STRIPPED_BIRCH_LOG
-  display-name: "<#F5DEB3>Stripped Birch"
-  slot: 16
-  amount: 16
+  display-name: "<#F5DEB3>Stripped Birch Log"
+  slot: 33
+  amount: 1
   buy-price: 10.0
   sell-price: 5.0
   page: 2
@@ -298,72 +426,234 @@ stripped_birch_log:
 
 stripped_jungle_log:
   material: STRIPPED_JUNGLE_LOG
-  display-name: "<#C8B89C>Stripped Jungle"
-  slot: 19
-  amount: 16
+  display-name: "<#C8B89C>Stripped Jungle Log"
+  slot: 34
+  amount: 1
   buy-price: 12.0
   sell-price: 6.0
   page: 2
   stock: -1
 
+# Page 3 - Stripped Wood & Planks
 stripped_acacia_log:
   material: STRIPPED_ACACIA_LOG
-  display-name: "<#D87C3C>Stripped Acacia"
-  slot: 20
-  amount: 16
+  display-name: "<#D87C3C>Stripped Acacia Log"
+  slot: 10
+  amount: 1
   buy-price: 12.0
   sell-price: 6.0
-  page: 2
+  page: 3
   stock: -1
 
 stripped_dark_oak_log:
   material: STRIPPED_DARK_OAK_LOG
-  display-name: "<#5C4033>Stripped Dark Oak"
-  slot: 21
-  amount: 16
+  display-name: "<#5C4033>Stripped Dark Oak Log"
+  slot: 11
+  amount: 1
   buy-price: 12.0
   sell-price: 6.0
-  page: 2
+  page: 3
   stock: -1
 
 stripped_mangrove_log:
   material: STRIPPED_MANGROVE_LOG
-  display-name: "<#A05A5A>Stripped Mangrove"
-  slot: 22
-  amount: 16
+  display-name: "<#A05A5A>Stripped Mangrove Log"
+  slot: 12
+  amount: 1
   buy-price: 14.0
   sell-price: 7.0
-  page: 2
+  page: 3
   stock: -1
 
 stripped_cherry_log:
   material: STRIPPED_CHERRY_LOG
-  display-name: "<#FFC0CB>Stripped Cherry"
-  slot: 23
-  amount: 16
+  display-name: "<#FFC0CB>Stripped Cherry Log"
+  slot: 13
+  amount: 1
   buy-price: 14.0
   sell-price: 7.0
-  page: 2
+  page: 3
   stock: -1
 
 stripped_bamboo_block:
   material: STRIPPED_BAMBOO_BLOCK
-  display-name: "<#D2B48C>Stripped Bamboo"
-  slot: 24
-  amount: 16
+  display-name: "<#D2B48C>Stripped Bamboo Block"
+  slot: 14
+  amount: 1
   buy-price: 12.0
   sell-price: 6.0
-  page: 2
+  page: 3
   stock: -1
 
+stripped_oak_wood:
+  material: STRIPPED_OAK_WOOD
+  display-name: "<#DEB887>Stripped Oak Wood"
+  slot: 15
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 3
+  stock: -1
+
+stripped_spruce_wood:
+  material: STRIPPED_SPRUCE_WOOD
+  display-name: "<#C19A6B>Stripped Spruce Wood"
+  slot: 16
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 3
+  stock: -1
+
+stripped_birch_wood:
+  material: STRIPPED_BIRCH_WOOD
+  display-name: "<#F5DEB3>Stripped Birch Wood"
+  slot: 19
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 3
+  stock: -1
+
+stripped_jungle_wood:
+  material: STRIPPED_JUNGLE_WOOD
+  display-name: "<#C8B89C>Stripped Jungle Wood"
+  slot: 20
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
+  page: 3
+  stock: -1
+
+stripped_acacia_wood:
+  material: STRIPPED_ACACIA_WOOD
+  display-name: "<#D87C3C>Stripped Acacia Wood"
+  slot: 21
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
+  page: 3
+  stock: -1
+
+stripped_dark_oak_wood:
+  material: STRIPPED_DARK_OAK_WOOD
+  display-name: "<#5C4033>Stripped Dark Oak Wood"
+  slot: 22
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
+  page: 3
+  stock: -1
+
+stripped_mangrove_wood:
+  material: STRIPPED_MANGROVE_WOOD
+  display-name: "<#A05A5A>Stripped Mangrove Wood"
+  slot: 23
+  amount: 1
+  buy-price: 14.0
+  sell-price: 7.0
+  page: 3
+  stock: -1
+
+stripped_cherry_wood:
+  material: STRIPPED_CHERRY_WOOD
+  display-name: "<#FFC0CB>Stripped Cherry Wood"
+  slot: 24
+  amount: 1
+  buy-price: 14.0
+  sell-price: 7.0
+  page: 3
+  stock: -1
+
+oak_planks:
+  material: OAK_PLANKS
+  display-name: "<#DEB887>Oak Planks"
+  slot: 25
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 3
+  stock: -1
+
+spruce_planks:
+  material: SPRUCE_PLANKS
+  display-name: "<#8B6914>Spruce Planks"
+  slot: 28
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 3
+  stock: -1
+
+birch_planks:
+  material: BIRCH_PLANKS
+  display-name: "<#F5F5DC>Birch Planks"
+  slot: 29
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 3
+  stock: -1
+
+jungle_planks:
+  material: JUNGLE_PLANKS
+  display-name: "<#A0826D>Jungle Planks"
+  slot: 30
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
+  page: 3
+  stock: -1
+
+acacia_planks:
+  material: ACACIA_PLANKS
+  display-name: "<#DEB887>Acacia Planks"
+  slot: 31
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
+  page: 3
+  stock: -1
+
+dark_oak_planks:
+  material: DARK_OAK_PLANKS
+  display-name: "<#4A3C28>Dark Oak Planks"
+  slot: 32
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
+  page: 3
+  stock: -1
+
+mangrove_planks:
+  material: MANGROVE_PLANKS
+  display-name: "<#A0826D>Mangrove Planks"
+  slot: 33
+  amount: 1
+  buy-price: 14.0
+  sell-price: 7.0
+  page: 3
+  stock: -1
+
+cherry_planks:
+  material: CHERRY_PLANKS
+  display-name: "<#F5C0C0>Cherry Planks"
+  slot: 34
+  amount: 1
+  buy-price: 14.0
+  sell-price: 7.0
+  page: 3
+  stock: -1
+
+# Page 4 - Stone Variants & Deepslate
 granite:
   material: GRANITE
   display-name: "<#FF6B6B>Granite"
-  slot: 25
-  amount: 64
+  slot: 10
+  amount: 1
   buy-price: 12.0
   sell-price: 6.0
-  page: 2
+  page: 4
   stock: -1
   lore:
     - "<gray>Coarse igneous rock"
@@ -371,11 +661,11 @@ granite:
 polished_granite:
   material: POLISHED_GRANITE
   display-name: "<#FF8888>Polished Granite"
-  slot: 28
-  amount: 64
+  slot: 11
+  amount: 1
   buy-price: 16.0
   sell-price: 8.0
-  page: 2
+  page: 4
   stock: -1
   lore:
     - "<gray>Smooth and refined"
@@ -383,272 +673,796 @@ polished_granite:
 diorite:
   material: DIORITE
   display-name: "<#F0F0F0>Diorite"
-  slot: 29
-  amount: 64
+  slot: 12
+  amount: 1
   buy-price: 12.0
   sell-price: 6.0
-  page: 2
+  page: 4
   stock: -1
 
 polished_diorite:
   material: POLISHED_DIORITE
   display-name: "<#F8F8F8>Polished Diorite"
-  slot: 30
-  amount: 64
+  slot: 13
+  amount: 1
   buy-price: 16.0
   sell-price: 8.0
-  page: 2
+  page: 4
   stock: -1
 
 andesite:
   material: ANDESITE
   display-name: "<#808080>Andesite"
-  slot: 31
-  amount: 64
+  slot: 14
+  amount: 1
   buy-price: 12.0
   sell-price: 6.0
-  page: 2
+  page: 4
   stock: -1
 
 polished_andesite:
   material: POLISHED_ANDESITE
   display-name: "<#909090>Polished Andesite"
-  slot: 32
-  amount: 64
+  slot: 15
+  amount: 1
   buy-price: 16.0
   sell-price: 8.0
-  page: 2
+  page: 4
   stock: -1
 
-mossy_cobblestone:
-  material: MOSSY_COBBLESTONE
-  display-name: "<#556B2F>Mossy Cobblestone"
-  slot: 33
-  amount: 64
+smooth_stone:
+  material: SMOOTH_STONE
+  display-name: "<#C0C0C0>Smooth Stone"
+  slot: 16
+  amount: 1
   buy-price: 14.0
   sell-price: 7.0
-  page: 2
-  stock: -1
-
-mossy_stone_bricks:
-  material: MOSSY_STONE_BRICKS
-  display-name: "<#6B8E23>Mossy Stone Bricks"
-  slot: 34
-  amount: 64
-  buy-price: 18.0
-  sell-price: 9.0
-  page: 2
-  stock: -1
-
-# Page 3 - Processed & Decorative Blocks
-stone_bricks:
-  material: STONE_BRICKS
-  display-name: "<#A0A0A0>Stone Bricks"
-  slot: 10
-  amount: 64
-  buy-price: 18.0
-  sell-price: 9.0
-  page: 3
-  stock: -1
-  lore:
-    - "<gray>Elegant building material"
-
-cracked_stone_bricks:
-  material: CRACKED_STONE_BRICKS
-  display-name: "<#A8A8A8>Cracked Stone Bricks"
-  slot: 11
-  amount: 64
-  buy-price: 18.0
-  sell-price: 9.0
-  page: 3
-  stock: -1
-
-chiseled_stone_bricks:
-  material: CHISELED_STONE_BRICKS
-  display-name: "<#B0B0B0>Chiseled Stone Bricks"
-  slot: 12
-  amount: 64
-  buy-price: 20.0
-  sell-price: 10.0
-  page: 3
+  page: 4
   stock: -1
 
 deepslate:
   material: DEEPSLATE
   display-name: "<#2F2F2F>Deepslate"
-  slot: 13
-  amount: 64
+  slot: 19
+  amount: 1
   buy-price: 14.0
   sell-price: 7.0
-  page: 3
+  page: 4
   stock: -1
 
 cobbled_deepslate:
   material: COBBLED_DEEPSLATE
   display-name: "<#363636>Cobbled Deepslate"
-  slot: 14
-  amount: 64
+  slot: 20
+  amount: 1
   buy-price: 16.0
   sell-price: 8.0
-  page: 3
+  page: 4
   stock: -1
 
 polished_deepslate:
   material: POLISHED_DEEPSLATE
   display-name: "<#404040>Polished Deepslate"
-  slot: 15
-  amount: 64
+  slot: 21
+  amount: 1
   buy-price: 20.0
   sell-price: 10.0
-  page: 3
+  page: 4
   stock: -1
 
 deepslate_bricks:
   material: DEEPSLATE_BRICKS
   display-name: "<#484848>Deepslate Bricks"
-  slot: 16
-  amount: 64
+  slot: 22
+  amount: 1
   buy-price: 22.0
   sell-price: 11.0
-  page: 3
+  page: 4
   stock: -1
 
 deepslate_tiles:
   material: DEEPSLATE_TILES
   display-name: "<#505050>Deepslate Tiles"
-  slot: 19
-  amount: 64
+  slot: 23
+  amount: 1
   buy-price: 22.0
   sell-price: 11.0
-  page: 3
+  page: 4
   stock: -1
 
-blackstone:
-  material: BLACKSTONE
-  display-name: "<#1C1C1C>Blackstone"
-  slot: 20
-  amount: 64
+cracked_deepslate_bricks:
+  material: CRACKED_DEEPSLATE_BRICKS
+  display-name: "<#505050>Cracked Deepslate Bricks"
+  slot: 24
+  amount: 1
+  buy-price: 22.0
+  sell-price: 11.0
+  page: 4
+  stock: -1
+
+cracked_deepslate_tiles:
+  material: CRACKED_DEEPSLATE_TILES
+  display-name: "<#505050>Cracked Deepslate Tiles"
+  slot: 25
+  amount: 1
+  buy-price: 22.0
+  sell-price: 11.0
+  page: 4
+  stock: -1
+
+chiseled_deepslate:
+  material: CHISELED_DEEPSLATE
+  display-name: "<#585858>Chiseled Deepslate"
+  slot: 28
+  amount: 1
+  buy-price: 24.0
+  sell-price: 12.0
+  page: 4
+  stock: -1
+
+reinforced_deepslate:
+  material: REINFORCED_DEEPSLATE
+  display-name: "<#1A1A1A>Reinforced Deepslate"
+  slot: 29
+  amount: 1
+  buy-price: 50.0
+  sell-price: 25.0
+  page: 4
+  stock: -1
+  lore:
+    - "<gray>Extremely tough"
+
+calcite:
+  material: CALCITE
+  display-name: "<#F5F5F5>Calcite"
+  slot: 30
+  amount: 1
   buy-price: 18.0
   sell-price: 9.0
-  page: 3
+  page: 4
   stock: -1
 
-polished_blackstone:
-  material: POLISHED_BLACKSTONE
-  display-name: "<#282828>Polished Blackstone"
+tuff:
+  material: TUFF
+  display-name: "<#888888>Tuff"
+  slot: 31
+  amount: 1
+  buy-price: 14.0
+  sell-price: 7.0
+  page: 4
+  stock: -1
+
+dripstone_block:
+  material: DRIPSTONE_BLOCK
+  display-name: "<#A8A8A8>Dripstone Block"
+  slot: 32
+  amount: 1
+  buy-price: 16.0
+  sell-price: 8.0
+  page: 4
+  stock: -1
+
+bedrock:
+  material: BEDROCK
+  display-name: "<dark_gray>Bedrock"
+  slot: 33
+  amount: 1
+  buy-price: 100.0
+  sell-price: 50.0
+  page: 4
+  stock: -1
+  lore:
+    - "<gray>Unbreakable foundation"
+
+obsidian:
+  material: OBSIDIAN
+  display-name: "<#2E0A4E>Obsidian"
+  slot: 34
+  amount: 1
+  buy-price: 30.0
+  sell-price: 15.0
+  page: 4
+  stock: -1
+  lore:
+    - "<gray>Blast resistant"
+
+# Page 5 - Stone Bricks & Prismarine
+stone_bricks:
+  material: STONE_BRICKS
+  display-name: "<#A0A0A0>Stone Bricks"
+  slot: 10
+  amount: 1
+  buy-price: 18.0
+  sell-price: 9.0
+  page: 5
+  stock: -1
+  lore:
+    - "<gray>Elegant building material"
+
+mossy_stone_bricks:
+  material: MOSSY_STONE_BRICKS
+  display-name: "<#6B8E23>Mossy Stone Bricks"
+  slot: 11
+  amount: 1
+  buy-price: 20.0
+  sell-price: 10.0
+  page: 5
+  stock: -1
+
+cracked_stone_bricks:
+  material: CRACKED_STONE_BRICKS
+  display-name: "<#A8A8A8>Cracked Stone Bricks"
+  slot: 12
+  amount: 1
+  buy-price: 18.0
+  sell-price: 9.0
+  page: 5
+  stock: -1
+
+chiseled_stone_bricks:
+  material: CHISELED_STONE_BRICKS
+  display-name: "<#B0B0B0>Chiseled Stone Bricks"
+  slot: 13
+  amount: 1
+  buy-price: 20.0
+  sell-price: 10.0
+  page: 5
+  stock: -1
+
+bricks:
+  material: BRICKS
+  display-name: "<#B22222>Bricks"
+  slot: 14
+  amount: 1
+  buy-price: 20.0
+  sell-price: 10.0
+  page: 5
+  stock: -1
+  lore:
+    - "<gray>Classic building material"
+
+prismarine:
+  material: PRISMARINE
+  display-name: "<#4E8B87>Prismarine"
+  slot: 15
+  amount: 1
+  buy-price: 24.0
+  sell-price: 12.0
+  page: 5
+  stock: -1
+
+prismarine_bricks:
+  material: PRISMARINE_BRICKS
+  display-name: "<#3A7A76>Prismarine Bricks"
+  slot: 16
+  amount: 1
+  buy-price: 26.0
+  sell-price: 13.0
+  page: 5
+  stock: -1
+
+dark_prismarine:
+  material: DARK_PRISMARINE
+  display-name: "<#1E5A56>Dark Prismarine"
+  slot: 19
+  amount: 1
+  buy-price: 26.0
+  sell-price: 13.0
+  page: 5
+  stock: -1
+
+sandstone:
+  material: SANDSTONE
+  display-name: "<#E0D0A0>Sandstone"
+  slot: 20
+  amount: 1
+  buy-price: 14.0
+  sell-price: 7.0
+  page: 5
+  stock: -1
+
+cut_sandstone:
+  material: CUT_SANDSTONE
+  display-name: "<#E8D8A8>Cut Sandstone"
   slot: 21
-  amount: 64
-  buy-price: 22.0
-  sell-price: 11.0
-  page: 3
+  amount: 1
+  buy-price: 16.0
+  sell-price: 8.0
+  page: 5
+  stock: -1
+
+chiseled_sandstone:
+  material: CHISELED_SANDSTONE
+  display-name: "<#F0E0B0>Chiseled Sandstone"
+  slot: 22
+  amount: 1
+  buy-price: 18.0
+  sell-price: 9.0
+  page: 5
+  stock: -1
+
+smooth_sandstone:
+  material: SMOOTH_SANDSTONE
+  display-name: "<#F0E8C0>Smooth Sandstone"
+  slot: 23
+  amount: 1
+  buy-price: 18.0
+  sell-price: 9.0
+  page: 5
+  stock: -1
+
+red_sandstone:
+  material: RED_SANDSTONE
+  display-name: "<#D2691E>Red Sandstone"
+  slot: 24
+  amount: 1
+  buy-price: 14.0
+  sell-price: 7.0
+  page: 5
+  stock: -1
+
+cut_red_sandstone:
+  material: CUT_RED_SANDSTONE
+  display-name: "<#D87C3C>Cut Red Sandstone"
+  slot: 25
+  amount: 1
+  buy-price: 16.0
+  sell-price: 8.0
+  page: 5
+  stock: -1
+
+chiseled_red_sandstone:
+  material: CHISELED_RED_SANDSTONE
+  display-name: "<#E08B4C>Chiseled Red Sandstone"
+  slot: 28
+  amount: 1
+  buy-price: 18.0
+  sell-price: 9.0
+  page: 5
+  stock: -1
+
+smooth_red_sandstone:
+  material: SMOOTH_RED_SANDSTONE
+  display-name: "<#E89C5C>Smooth Red Sandstone"
+  slot: 29
+  amount: 1
+  buy-price: 18.0
+  sell-price: 9.0
+  page: 5
+  stock: -1
+
+sponge:
+  material: SPONGE
+  display-name: "<#F5D76E>Sponge"
+  slot: 30
+  amount: 1
+  buy-price: 30.0
+  sell-price: 15.0
+  page: 5
+  stock: -1
+
+wet_sponge:
+  material: WET_SPONGE
+  display-name: "<#C8B65C>Wet Sponge"
+  slot: 31
+  amount: 1
+  buy-price: 30.0
+  sell-price: 15.0
+  page: 5
+  stock: -1
+
+infested_stone:
+  material: INFESTED_STONE
+  display-name: "<#9E9E9E>Infested Stone"
+  slot: 32
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 5
+  stock: -1
+  lore:
+    - "<gray>Contains silverfish"
+
+infested_cobblestone:
+  material: INFESTED_COBBLESTONE
+  display-name: "<#8A8A8A>Infested Cobblestone"
+  slot: 33
+  amount: 1
+  buy-price: 8.0
+  sell-price: 4.0
+  page: 5
+  stock: -1
+
+infested_stone_bricks:
+  material: INFESTED_STONE_BRICKS
+  display-name: "<#A8A8A8>Infested Stone Bricks"
+  slot: 34
+  amount: 1
+  buy-price: 18.0
+  sell-price: 9.0
+  page: 5
+  stock: -1
+
+# Page 6 - Nether & Blackstone
+netherrack:
+  material: NETHERRACK
+  display-name: "<#C42B1E>Netherrack"
+  slot: 10
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 6
   stock: -1
 
 nether_bricks:
   material: NETHER_BRICKS
   display-name: "<#4A0000>Nether Bricks"
-  slot: 22
-  amount: 64
+  slot: 11
+  amount: 1
   buy-price: 24.0
   sell-price: 12.0
-  page: 3
+  page: 6
   stock: -1
 
+cracked_nether_bricks:
+  material: CRACKED_NETHER_BRICKS
+  display-name: "<#5A0A0A>Cracked Nether Bricks"
+  slot: 12
+  amount: 1
+  buy-price: 24.0
+  sell-price: 12.0
+  page: 6
+  stock: -1
+
+chiseled_nether_bricks:
+  material: CHISELED_NETHER_BRICKS
+  display-name: "<#6A1A1A>Chiseled Nether Bricks"
+  slot: 13
+  amount: 1
+  buy-price: 26.0
+  sell-price: 13.0
+  page: 6
+  stock: -1
+
+red_nether_bricks:
+  material: RED_NETHER_BRICKS
+  display-name: "<#6A0000>Red Nether Bricks"
+  slot: 14
+  amount: 1
+  buy-price: 24.0
+  sell-price: 12.0
+  page: 6
+  stock: -1
+
+blackstone:
+  material: BLACKSTONE
+  display-name: "<#1C1C1C>Blackstone"
+  slot: 15
+  amount: 1
+  buy-price: 18.0
+  sell-price: 9.0
+  page: 6
+  stock: -1
+
+polished_blackstone:
+  material: POLISHED_BLACKSTONE
+  display-name: "<#282828>Polished Blackstone"
+  slot: 16
+  amount: 1
+  buy-price: 22.0
+  sell-price: 11.0
+  page: 6
+  stock: -1
+
+polished_blackstone_bricks:
+  material: POLISHED_BLACKSTONE_BRICKS
+  display-name: "<#343434>Polished Blackstone Bricks"
+  slot: 19
+  amount: 1
+  buy-price: 24.0
+  sell-price: 12.0
+  page: 6
+  stock: -1
+
+chiseled_polished_blackstone:
+  material: CHISELED_POLISHED_BLACKSTONE
+  display-name: "<#404040>Chiseled Polished Blackstone"
+  slot: 20
+  amount: 1
+  buy-price: 26.0
+  sell-price: 13.0
+  page: 6
+  stock: -1
+
+gilded_blackstone:
+  material: GILDED_BLACKSTONE
+  display-name: "<#4A3A1A>Gilded Blackstone"
+  slot: 21
+  amount: 1
+  buy-price: 28.0
+  sell-price: 14.0
+  page: 6
+  stock: -1
+  lore:
+    - "<gray>Golden accents"
+
+basalt:
+  material: BASALT
+  display-name: "<#363636>Basalt"
+  slot: 22
+  amount: 1
+  buy-price: 16.0
+  sell-price: 8.0
+  page: 6
+  stock: -1
+
+smooth_basalt:
+  material: SMOOTH_BASALT
+  display-name: "<#424242>Smooth Basalt"
+  slot: 23
+  amount: 1
+  buy-price: 18.0
+  sell-price: 9.0
+  page: 6
+  stock: -1
+
+polished_basalt:
+  material: POLISHED_BASALT
+  display-name: "<#4E4E4E>Polished Basalt"
+  slot: 24
+  amount: 1
+  buy-price: 20.0
+  sell-price: 10.0
+  page: 6
+  stock: -1
+
+soul_sand:
+  material: SOUL_SAND
+  display-name: "<#4A2C17>Soul Sand"
+  slot: 25
+  amount: 1
+  buy-price: 8.0
+  sell-price: 4.0
+  page: 6
+  stock: -1
+
+soul_soil:
+  material: SOUL_SOIL
+  display-name: "<#3A1C07>Soul Soil"
+  slot: 28
+  amount: 1
+  buy-price: 8.0
+  sell-price: 4.0
+  page: 6
+  stock: -1
+
+magma_block:
+  material: MAGMA_BLOCK
+  display-name: "<#C43B2E>Magma Block"
+  slot: 29
+  amount: 1
+  buy-price: 20.0
+  sell-price: 10.0
+  page: 6
+  stock: -1
+
+crying_obsidian:
+  material: CRYING_OBSIDIAN
+  display-name: "<#4A0E4A>Crying Obsidian"
+  slot: 30
+  amount: 1
+  buy-price: 32.0
+  sell-price: 16.0
+  page: 6
+  stock: -1
+
+end_stone:
+  material: END_STONE
+  display-name: "<#F5E6A8>End Stone"
+  slot: 31
+  amount: 1
+  buy-price: 16.0
+  sell-price: 8.0
+  page: 6
+  stock: -1
+
+bamboo_planks:
+  material: BAMBOO_PLANKS
+  display-name: "<#F5DEB3>Bamboo Planks"
+  slot: 32
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
+  page: 6
+  stock: -1
+
+bamboo_mosaic:
+  material: BAMBOO_MOSAIC
+  display-name: "<#F5E6C0>Bamboo Mosaic"
+  slot: 33
+  amount: 1
+  buy-price: 14.0
+  sell-price: 7.0
+  page: 6
+  stock: -1
+
+# Page 7 - Quartz & End Blocks
 quartz_block:
   material: QUARTZ_BLOCK
   display-name: "<#F0F0F0>Quartz Block"
-  slot: 23
-  amount: 64
+  slot: 10
+  amount: 1
   buy-price: 28.0
   sell-price: 14.0
-  page: 3
+  page: 7
   stock: -1
 
 smooth_quartz:
   material: SMOOTH_QUARTZ
   display-name: "<#F8F8F8>Smooth Quartz"
-  slot: 24
-  amount: 64
+  slot: 11
+  amount: 1
   buy-price: 30.0
   sell-price: 15.0
-  page: 3
+  page: 7
+  stock: -1
+
+chiseled_quartz_block:
+  material: CHISELED_QUARTZ_BLOCK
+  display-name: "<#F5F5F5>Chiseled Quartz"
+  slot: 12
+  amount: 1
+  buy-price: 30.0
+  sell-price: 15.0
+  page: 7
   stock: -1
 
 quartz_bricks:
   material: QUARTZ_BRICKS
   display-name: "<#F5F5F5>Quartz Bricks"
-  slot: 25
-  amount: 64
+  slot: 13
+  amount: 1
   buy-price: 32.0
   sell-price: 16.0
-  page: 3
+  page: 7
   stock: -1
 
-white_concrete:
-  material: WHITE_CONCRETE
-  display-name: "<white>White Concrete"
-  slot: 28
-  amount: 64
-  buy-price: 20.0
-  sell-price: 10.0
-  page: 3
+quartz_pillar:
+  material: QUARTZ_PILLAR
+  display-name: "<#F0F0F0>Quartz Pillar"
+  slot: 14
+  amount: 1
+  buy-price: 32.0
+  sell-price: 16.0
+  page: 7
   stock: -1
 
-light_gray_concrete:
-  material: LIGHT_GRAY_CONCRETE
-  display-name: "<gray>Light Gray Concrete"
-  slot: 29
-  amount: 64
-  buy-price: 20.0
-  sell-price: 10.0
-  page: 3
-  stock: -1
-
-gray_concrete:
-  material: GRAY_CONCRETE
-  display-name: "<dark_gray>Gray Concrete"
-  slot: 30
-  amount: 64
-  buy-price: 20.0
-  sell-price: 10.0
-  page: 3
-  stock: -1
-
-black_concrete:
-  material: BLACK_CONCRETE
-  display-name: "<black>Black Concrete"
-  slot: 31
-  amount: 64
-  buy-price: 20.0
-  sell-price: 10.0
-  page: 3
-  stock: -1
-
-terracotta:
-  material: TERRACOTTA
-  display-name: "<#CC7C37>Terracotta"
-  slot: 32
-  amount: 64
+end_stone_bricks:
+  material: END_STONE_BRICKS
+  display-name: "<#F0E0B0>End Stone Bricks"
+  slot: 15
+  amount: 1
   buy-price: 18.0
   sell-price: 9.0
-  page: 3
+  page: 7
   stock: -1
 
-white_terracotta:
-  material: WHITE_TERRACOTTA
-  display-name: "<#F0E7E0>White Terracotta"
-  slot: 33
-  amount: 64
-  buy-price: 20.0
-  sell-price: 10.0
-  page: 3
+purpur_block:
+  material: PURPUR_BLOCK
+  display-name: "<#C8A0C8>Purpur Block"
+  slot: 16
+  amount: 1
+  buy-price: 24.0
+  sell-price: 12.0
+  page: 7
   stock: -1
 
-black_terracotta:
-  material: BLACK_TERRACOTTA
-  display-name: "<#3E2E2C>Black Terracotta"
-  slot: 34
-  amount: 64
+purpur_pillar:
+  material: PURPUR_PILLAR
+  display-name: "<#D0A8D0>Purpur Pillar"
+  slot: 19
+  amount: 1
+  buy-price: 26.0
+  sell-price: 13.0
+  page: 7
+  stock: -1
+
+packed_ice:
+  material: PACKED_ICE
+  display-name: "<#B0E0E6>Packed Ice"
+  slot: 20
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
+  page: 7
+  stock: -1
+
+blue_ice:
+  material: BLUE_ICE
+  display-name: "<#A0D0E0>Blue Ice"
+  slot: 21
+  amount: 1
+  buy-price: 18.0
+  sell-price: 9.0
+  page: 7
+  stock: -1
+
+sculk:
+  material: SCULK
+  display-name: "<#0A0A0A>Sculk"
+  slot: 22
+  amount: 1
   buy-price: 20.0
   sell-price: 10.0
-  page: 3
+  page: 7
+  stock: -1
+
+sculk_catalyst:
+  material: SCULK_CATALYST
+  display-name: "<#1A1A1A>Sculk Catalyst"
+  slot: 23
+  amount: 1
+  buy-price: 26.0
+  sell-price: 13.0
+  page: 7
+  stock: -1
+
+sculk_shrieker:
+  material: SCULK_SHRIEKER
+  display-name: "<#2A2A2A>Sculk Shrieker"
+  slot: 24
+  amount: 1
+  buy-price: 28.0
+  sell-price: 14.0
+  page: 7
+  stock: -1
+
+target:
+  material: TARGET
+  display-name: "<#FF6B6B>Target Block"
+  slot: 25
+  amount: 1
+  buy-price: 24.0
+  sell-price: 12.0
+  page: 7
+  stock: -1
+
+amethyst_block:
+  material: AMETHYST_BLOCK
+  display-name: "<#D0A0E0>Amethyst Block"
+  slot: 28
+  amount: 1
+  buy-price: 26.0
+  sell-price: 13.0
+  page: 7
+  stock: -1
+
+budding_amethyst:
+  material: BUDDING_AMETHYST
+  display-name: "<#D8A8E8>Budding Amethyst"
+  slot: 29
+  amount: 1
+  buy-price: 28.0
+  sell-price: 14.0
+  page: 7
+  stock: -1
+
+bone_block:
+  material: BONE_BLOCK
+  display-name: "<#F5F5DC>Bone Block"
+  slot: 30
+  amount: 1
+  buy-price: 18.0
+  sell-price: 9.0
+  page: 7
+  stock: -1
+
+honeycomb_block:
+  material: HONEYCOMB_BLOCK
+  display-name: "<#F5D76E>Honeycomb Block"
+  slot: 31
+  amount: 1
+  buy-price: 22.0
+  sell-price: 11.0
+  page: 7
   stock: -1

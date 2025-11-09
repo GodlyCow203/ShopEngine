@@ -28,6 +28,8 @@ public class ShopCommand implements CommandExecutor {
             plugin.getShopManager().openShop(player);
             return true;
         }
+        plugin.incrementShopCommand();
+
 
         switch (args[0].toLowerCase()) {
             case "reload" -> handleReload(sender, args);

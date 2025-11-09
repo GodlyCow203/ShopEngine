@@ -1,30 +1,209 @@
-# Mineral Items
 coal:
   material: COAL
-  display-name: "<dark_gray>Coal"
-  slot: 0
-  amount: 32
-  buy-price: 15.0
-  sell-price: 7.5
+  display-name: "<#2C2C2C>Coal"
+  slot: 10
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+
+coal_block:
+  material: COAL_BLOCK
+  display-name: "<#2C2C2C>Coal Block"
+  slot: 11
+  amount: 1
+  buy-price: 54.0
+  sell-price: 27.0
+  page: 1
+  stock: -1
+
+copper_ingot:
+  material: COPPER_INGOT
+  display-name: "<#C46A2B>Copper Ingot"
+  slot: 12
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 1
+  stock: -1
+
+copper_block:
+  material: COPPER_BLOCK
+  display-name: "<#C46A2B>Copper Block"
+  slot: 13
+  amount: 1
+  buy-price: 90.0
+  sell-price: 45.0
+  page: 1
   stock: -1
 
 iron_ingot:
   material: IRON_INGOT
-  display-name: "<white>Iron Ingot"
-  slot: 1
-  amount: 16
-  buy-price: 30.0
-  sell-price: 15.0
+  display-name: "<#D4D4D4>Iron Ingot"
+  slot: 14
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
+  page: 1
+  stock: -1
+
+iron_block:
+  material: IRON_BLOCK
+  display-name: "<#D4D4D4>Iron Block"
+  slot: 15
+  amount: 1
+  buy-price: 108.0
+  sell-price: 54.0
+  page: 1
+  stock: -1
+
+gold_ingot:
+  material: GOLD_INGOT
+  display-name: "<#FFDD55>Gold Ingot"
+  slot: 16
+  amount: 1
+  buy-price: 18.0
+  sell-price: 9.0
+  page: 1
+  stock: -1
+
+gold_block:
+  material: GOLD_BLOCK
+  display-name: "<#FFDD55>Gold Block"
+  slot: 19
+  amount: 1
+  buy-price: 162.0
+  sell-price: 81.0
+  page: 1
+  stock: -1
+
+redstone:
+  material: REDSTONE
+  display-name: "<#FF0000>Redstone"
+  slot: 20
+  amount: 1
+  buy-price: 5.0
+  sell-price: 2.5
+  page: 1
+  stock: -1
+
+redstone_block:
+  material: REDSTONE_BLOCK
+  display-name: "<#FF0000>Redstone Block"
+  slot: 21
+  amount: 1
+  buy-price: 45.0
+  sell-price: 22.5
+  page: 1
+  stock: -1
+
+lapis_lazuli:
+  material: LAPIS_LAZULI
+  display-name: "<#2141FF>Lapis Lazuli"
+  slot: 22
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+
+lapis_block:
+  material: LAPIS_BLOCK
+  display-name: "<#2141FF>Lapis Block"
+  slot: 23
+  amount: 1
+  buy-price: 54.0
+  sell-price: 27.0
+  page: 1
+  stock: -1
+
+quartz:
+  material: QUARTZ
+  display-name: "<#FFFFFF>Quartz"
+  slot: 24
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+
+quartz_block:
+  material: QUARTZ_BLOCK
+  display-name: "<#FFFFFF>Quartz Block"
+  slot: 25
+  amount: 1
+  buy-price: 54.0
+  sell-price: 27.0
+  page: 1
   stock: -1
 
 diamond:
   material: DIAMOND
-  display-name: "<aqua>💎 Diamond 💎"
-  slot: 2
+  display-name: "<#00D0FF>Diamond"
+  slot: 28
+  amount: 1
+  buy-price: 40.0
+  sell-price: 20.0
+  page: 1
+  stock: -1
+
+diamond_block:
+  material: DIAMOND_BLOCK
+  display-name: "<#00D0FF>Diamond Block"
+  slot: 29
+  amount: 1
+  buy-price: 360.0
+  sell-price: 180.0
+  page: 1
+  stock: -1
+
+emerald:
+  material: EMERALD
+  display-name: "<#00FF55>Emerald"
+  slot: 30
+  amount: 1
+  buy-price: 48.0
+  sell-price: 24.0
+  page: 1
+  stock: -1
+
+emerald_block:
+  material: EMERALD_BLOCK
+  display-name: "<#00FF55>Emerald Block"
+  slot: 31
+  amount: 1
+  buy-price: 432.0
+  sell-price: 216.0
+  page: 1
+  stock: -1
+
+netherite_ingot:
+  material: NETHERITE_INGOT
+  display-name: "<#4D4D4D>Netherite Ingot"
+  slot: 32
+  amount: 1
+  buy-price: 200.0
+  sell-price: 100.0
+  page: 1
+  stock: -1
+
+netherite_block:
+  material: NETHERITE_BLOCK
+  display-name: "<#4D4D4D>Netherite Block"
+  slot: 33
+  amount: 1
+  buy-price: 1800.0
+  sell-price: 900.0
+  page: 1
+  stock: -1
+
+ancient_debris:
+  material: ANCIENT_DEBRIS
+  display-name: "<#8A6552>Ancient Debris"
+  slot: 34
   amount: 1
   buy-price: 100.0
   sell-price: 50.0
-  stock: 32
-  lore:
-    - "<yellow>• Extremely valuable"
-    - "<yellow>• High demand item"
+  page: 1
+  stock: -1

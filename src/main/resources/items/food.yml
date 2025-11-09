@@ -1,18 +1,409 @@
-# Food Items
 bread:
   material: BREAD
-  display-name: "<#DAA06D>Bread"
-  slot: 0
-  amount: 16
-  buy-price: 12.0
-  sell-price: 6.0
+  display-name: "<#F5DEB3>Bread"
+  slot: 10
+  amount: 1
+  buy-price: 3.0
+  sell-price: 1.5
+  page: 1
   stock: -1
 
-steak:
+apple:
+  material: APPLE
+  display-name: "<#FF0000>Apple"
+  slot: 11
+  amount: 1
+  buy-price: 2.0
+  sell-price: 1.0
+  page: 1
+  stock: -1
+
+carrot:
+  material: CARROT
+  display-name: "<#FFA500>Carrot"
+  slot: 12
+  amount: 1
+  buy-price: 2.0
+  sell-price: 1.0
+  page: 1
+  stock: -1
+
+potato:
+  material: POTATO
+  display-name: "<#D2B48C>Potato"
+  slot: 13
+  amount: 1
+  buy-price: 2.0
+  sell-price: 1.0
+  page: 1
+  stock: -1
+
+cooked_beef:
   material: COOKED_BEEF
-  display-name: "<dark_red>Steak"
-  slot: 1
-  amount: 8
-  buy-price: 20.0
-  sell-price: 10.0
+  display-name: "<#8B4513>Cooked Beef"
+  slot: 14
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+
+cooked_porkchop:
+  material: COOKED_PORKCHOP
+  display-name: "<#D2691E>Cooked Porkchop"
+  slot: 15
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+
+cooked_chicken:
+  material: COOKED_CHICKEN
+  display-name: "<#FFD700>Cooked Chicken"
+  slot: 16
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+
+cooked_mutton:
+  material: COOKED_MUTTON
+  display-name: "<#A0522D>Cooked Mutton"
+  slot: 19
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+
+salmon:
+  material: SALMON
+  display-name: "<#FF7F50>Salmon"
+  slot: 20
+  amount: 1
+  buy-price: 5.0
+  sell-price: 2.5
+  page: 1
+  stock: -1
+
+cooked_salmon:
+  material: COOKED_SALMON
+  display-name: "<#FF6347>Cooked Salmon"
+  slot: 21
+  amount: 1
+  buy-price: 7.0
+  sell-price: 3.5
+  page: 1
+  stock: -1
+
+cod:
+  material: COD
+  display-name: "<#4682B4>Cod"
+  slot: 22
+  amount: 1
+  buy-price: 4.0
+  sell-price: 2.0
+  page: 1
+  stock: -1
+
+cooked_cod:
+  material: COOKED_COD
+  display-name: "<#1E90FF>Cooked Cod"
+  slot: 23
+  amount: 1
+  buy-price: 6.0
+  sell-price: 3.0
+  page: 1
+  stock: -1
+
+cake:
+  material: CAKE
+  display-name: "<#FFB6C1>Cake"
+  slot: 24
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
+  page: 1
+  stock: -1
+
+golden_apple:
+  material: GOLDEN_APPLE
+  display-name: "<#FFD700>Golden Apple"
+  slot: 25
+  amount: 1
+  buy-price: 50.0
+  sell-price: 25.0
+  page: 1
+  stock: -1
+
+enchanted_golden_apple:
+  material: ENCHANTED_GOLDEN_APPLE
+  display-name: "<#FF4500>Enchanted Golden Apple"
+  slot: 28
+  amount: 1
+  buy-price: 250.0
+  sell-price: 125.0
+  page: 1
+  stock: -1
+
+honey_bottle:
+  material: HONEY_BOTTLE
+  display-name: "<#FFC30B>Honey Bottle"
+  slot: 29
+  amount: 1
+  buy-price: 5.0
+  sell-price: 2.5
+  page: 1
+  stock: -1
+
+melon_slice:
+  material: MELON_SLICE
+  display-name: "<#32CD32>Melon Slice"
+  slot: 30
+  amount: 1
+  buy-price: 1.0
+  sell-price: 0.5
+  page: 1
+  stock: -1
+
+pumpkin_pie:
+  material: PUMPKIN_PIE
+  display-name: "<#FF8C00>Pumpkin Pie"
+  slot: 31
+  amount: 1
+  buy-price: 3.0
+  sell-price: 1.5
+  page: 1
+  stock: -1
+
+beetroot:
+  material: BEETROOT
+  display-name: "<#8B0000>Beetroot"
+  slot: 32
+  amount: 1
+  buy-price: 2.0
+  sell-price: 1.0
+  page: 1
+  stock: -1
+
+beetroot_soup:
+  material: BEETROOT_SOUP
+  display-name: "<#A52A2A>Beetroot Soup"
+  slot: 33
+  amount: 1
+  buy-price: 4.0
+  sell-price: 2.0
+  page: 1
+  stock: -1
+
+pufferfish:
+  material: PUFFERFISH
+  display-name: "<#1E90FF>Pufferfish"
+  slot: 34
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 1
+  stock: -1
+
+rabbit:
+  material: RABBIT
+  display-name: "<#DEB887>Rabbit"
+  slot: 10
+  amount: 1
+  buy-price: 5.0
+  sell-price: 2.5
+  page: 2
+  stock: -1
+
+cooked_rabbit:
+  material: COOKED_RABBIT
+  display-name: "<#CD853F>Cooked Rabbit"
+  slot: 11
+  amount: 1
+  buy-price: 7.0
+  sell-price: 3.5
+  page: 2
+  stock: -1
+
+rabbit_stew:
+  material: RABBIT_STEW
+  display-name: "<#A0522D>Rabbit Stew"
+  slot: 12
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 2
+  stock: -1
+
+cookie:
+  material: COOKIE
+  display-name: "<#D2691E>Cookie"
+  slot: 13
+  amount: 1
+  buy-price: 1.0
+  sell-price: 0.5
+  page: 2
+  stock: -1
+
+sweet_berries:
+  material: SWEET_BERRIES
+  display-name: "<#8B0000>Sweet Berries"
+  slot: 14
+  amount: 1
+  buy-price: 1.0
+  sell-price: 0.5
+  page: 2
+  stock: -1
+
+suspicious_stew:
+  material: SUSPICIOUS_STEW
+  display-name: "<#6A5ACD>Suspicious Stew"
+  slot: 15
+  amount: 1
+  buy-price: 8.0
+  sell-price: 4.0
+  page: 2
+  stock: -1
+
+tropical_fish:
+  material: TROPICAL_FISH
+  display-name: "<#20B2AA>Tropical Fish"
+  slot: 16
+  amount: 1
+  buy-price: 5.0
+  sell-price: 2.5
+  page: 2
+  stock: -1
+
+cod_bucket:
+  material: COD_BUCKET
+  display-name: "<#4682B4>Cod Bucket"
+  slot: 19
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 2
+  stock: -1
+
+salmon_bucket:
+  material: SALMON_BUCKET
+  display-name: "<#FF6347>Salmon Bucket"
+  slot: 20
+  amount: 1
+  buy-price: 10.0
+  sell-price: 5.0
+  page: 2
+  stock: -1
+
+tropical_fish_bucket:
+  material: TROPICAL_FISH_BUCKET
+  display-name: "<#20B2AA>Tropical Fish Bucket"
+  slot: 21
+  amount: 1
+  buy-price: 12.0
+  sell-price: 6.0
+  page: 2
+  stock: -1
+
+pufferfish_bucket:
+  material: PUFFERFISH_BUCKET
+  display-name: "<#1E90FF>Pufferfish Bucket"
+  slot: 22
+  amount: 1
+  buy-price: 15.0
+  sell-price: 7.5
+  page: 2
+  stock: -1
+
+honeycomb:
+  material: HONEYCOMB
+  display-name: "<#FFC30B>Honeycomb"
+  slot: 23
+  amount: 1
+  buy-price: 5.0
+  sell-price: 2.5
+  page: 2
+  stock: -1
+
+sugar:
+  material: SUGAR
+  display-name: "<#FFFFFF>Sugar"
+  slot: 24
+  amount: 1
+  buy-price: 1.0
+  sell-price: 0.5
+  page: 2
+  stock: -1
+
+milk_bucket:
+  material: MILK_BUCKET
+  display-name: "<#FFFFFF>Milk Bucket"
+  slot: 25
+  amount: 1
+  buy-price: 4.0
+  sell-price: 2.0
+  page: 2
+  stock: -1
+
+pumpkin:
+  material: PUMPKIN
+  display-name: "<#FF8C00>Pumpkin"
+  slot: 28
+  amount: 1
+  buy-price: 2.0
+  sell-price: 1.0
+  page: 2
+  stock: -1
+
+melon:
+  material: MELON
+  display-name: "<#32CD32>Melon"
+  slot: 29
+  amount: 1
+  buy-price: 2.0
+  sell-price: 1.0
+  page: 2
+  stock: -1
+
+melon_block:
+  material: MELON_BLOCK
+  display-name: "<#32CD32>Melon Block"
+  slot: 30
+  amount: 1
+  buy-price: 18.0
+  sell-price: 9.0
+  page: 2
+  stock: -1
+
+mushroom_stew:
+  material: MUSHROOM_STEW
+  display-name: "<#8B4513>Mushroom Stew"
+  slot: 31
+  amount: 1
+  buy-price: 4.0
+  sell-price: 2.0
+  page: 2
+  stock: -1
+
+suspicious_stew_red:
+  material: SUSPICIOUS_STEW
+  display-name: "<#FF0000>Suspicious Red Stew"
+  slot: 32
+  amount: 1
+  buy-price: 8.0
+  sell-price: 4.0
+  page: 2
+  stock: -1
+
+suspicious_stew_brown:
+  material: SUSPICIOUS_STEW
+  display-name: "<#8B4513>Suspicious Brown Stew"
+  slot: 33
+  amount: 1
+  buy-price: 8.0
+  sell-price: 4.0
+  page: 2
   stock: -1

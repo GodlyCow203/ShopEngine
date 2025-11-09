@@ -7,12 +7,16 @@ import net.godlycow.org.shopengine.config.MessageManager;
 import net.godlycow.org.shopengine.config.SectionManager;
 import net.godlycow.org.shopengine.economy.EconomyManager;
 import net.godlycow.org.shopengine.listeners.ShopListener;
+import net.godlycow.org.shopengine.metrics.Metrics;
 import net.godlycow.org.shopengine.player.PlayerDataManager;
 import net.godlycow.org.shopengine.shop.DynamicPricingManager;
 import net.godlycow.org.shopengine.shop.ShopManager;
 import net.godlycow.org.shopengine.shop.StockManager;
+import net.godlycow.org.shopengine.updaters.spigotmc.SpigotMCUpdateChecker;
 import net.godlycow.org.shopengine.utils.SignInputManager;
+
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ShopEngine extends JavaPlugin {
@@ -28,6 +32,10 @@ public final class ShopEngine extends JavaPlugin {
     private PlayerDataManager playerDataManager;
     private SignInputManager signInputManager;
     private StockManager stockManager;
+    private Metrics metrics;
+    private int shopCommandCount = 0;
+
+
 
     @Override
     public void onEnable() {
@@ -41,8 +49,11 @@ public final class ShopEngine extends JavaPlugin {
         sectionManager = new SectionManager(this);
         itemManager = new ItemManager(this);
         playerDataManager = new PlayerDataManager(this);
-        signInputManager = new SignInputManager(this);  // NEW
+        signInputManager = new SignInputManager(this);
         stockManager = new StockManager();
+
+        registerMetrics();
+        startSpigotUpdateChecker();
 
 
         if (!setupEconomy()) {
@@ -64,6 +75,7 @@ public final class ShopEngine extends JavaPlugin {
 
     }
 
+
     @Override
     public void onDisable() {
         if (dynamicPricingManager != null) dynamicPricingManager.savePrices();
@@ -76,6 +88,16 @@ public final class ShopEngine extends JavaPlugin {
         economyManager = new EconomyManager(this);
         return economyManager.setup();
     }
+    private void registerMetrics() {
+        int pluginId = 27920;
+        metrics = new Metrics(this, pluginId);
+
+        metrics.addCustomChart(new Metrics.SingleLineChart("shop_command_usage", () -> shopCommandCount));
+    }
+    public void incrementShopCommand() {
+        shopCommandCount++;
+    }
+
 
 
 
@@ -91,4 +113,27 @@ public final class ShopEngine extends JavaPlugin {
     public PlayerDataManager getPlayerDataManager() { return playerDataManager; }
     public SignInputManager getSignInputManager() { return signInputManager; }
     public StockManager getStockManager() { return stockManager; }
+
+    private void startSpigotUpdateChecker() {
+        int resourceId = 130075;
+        SpigotMCUpdateChecker checker = new SpigotMCUpdateChecker(this, resourceId);
+
+        Bukkit.getScheduler().runTaskTimerAsynchronously(
+                this,
+                () -> checker.getLatestVersion(latest -> {
+                    String current = getDescription().getVersion();
+
+                    if (!latest.equalsIgnoreCase(current)) {
+                        getLogger().warning("==================================================");
+                        getLogger().warning(" A new version of ShopEngine is available!");
+                        getLogger().warning(" Current: " + current);
+                        getLogger().warning(" Latest:  " + latest);
+                        getLogger().warning(" Download: https://www.spigotmc.org/resources/" + resourceId + "/");
+                        getLogger().warning("==================================================");
+                    }
+                }),
+                20L,
+                1200L
+        );
+    }
 }

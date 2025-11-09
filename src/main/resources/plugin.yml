@@ -1,8 +1,8 @@
 name: ShopEngine
-version: 1.0.0
+version: 0.0.2
 main: net.godlycow.org.shopengine.ShopEngine
 api-version: '1.20'
-author: YourName
+author: _GodlyCow
 description: A modern shop GUI plugin with dynamic pricing and Vault integration
 softdepend:
   - Vault

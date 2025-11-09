@@ -1,6 +1,7 @@
 package net.godlycow.org.shopengine.config;
 
 import net.godlycow.org.shopengine.ShopEngine;
+import net.godlycow.org.shopengine.shop.ShopError;
 import net.godlycow.org.shopengine.shop.ShopItem;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -18,6 +19,8 @@ public class ItemManager {
     private final ShopEngine plugin;
     private final File itemsFolder;
     private final Map<String, List<ShopItem>> itemCache = new HashMap<>();
+    private final Map<String, List<ShopError>> errorCache = new HashMap<>();
+
 
     public ItemManager(ShopEngine plugin) {
         this.plugin = plugin;
