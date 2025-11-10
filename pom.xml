@@ -6,7 +6,7 @@
 
     <groupId>net.godlycow.org</groupId>
     <artifactId>ShopEngineV3</artifactId>
-    <version>Alpha 0.0.2</version>
+    <version>Alpha 0.0.3</version>
     <packaging>jar</packaging>
 
     <name>ShopEngine</name>

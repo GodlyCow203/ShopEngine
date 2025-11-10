@@ -51,6 +51,8 @@ public final class ShopEngine extends JavaPlugin {
         playerDataManager = new PlayerDataManager(this);
         signInputManager = new SignInputManager(this);
         stockManager = new StockManager();
+        new SpigotMCUpdateChecker(this, 130057).checkForUpdates();
+
 
         registerMetrics();
         startSpigotUpdateChecker();

@@ -21,7 +21,6 @@ public class ItemManager {
     private final Map<String, List<ShopItem>> itemCache = new HashMap<>();
     private final Map<String, List<ShopError>> errorCache = new HashMap<>();
 
-
     public ItemManager(ShopEngine plugin) {
         this.plugin = plugin;
         this.itemsFolder = new File(plugin.getDataFolder(), "items");
@@ -51,6 +50,7 @@ public class ItemManager {
 
     public void loadItems() {
         itemCache.clear();
+        errorCache.clear();
 
         File[] files = itemsFolder.listFiles((dir, name) -> name.endsWith(".yml"));
         if (files == null || files.length == 0) {
@@ -63,32 +63,46 @@ public class ItemManager {
                 String fileName = file.getName().replace(".yml", "");
                 FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
-                List<ShopItem> items = loadItemsFromFile(config, fileName);
-                itemCache.put(fileName, items);
+                Map<String, Object> results = loadItemsFromFile(config, fileName);
+                List<ShopItem> items = (List<ShopItem>) results.get("items");
+                List<ShopError> errors = (List<ShopError>) results.get("errors");
 
-                plugin.getLogger().info("Loaded " + items.size() + " items from " + file.getName());
+                itemCache.put(fileName, items);
+                errorCache.put(fileName, errors);
+
+                plugin.getLogger().info("Loaded " + items.size() + " items and " + errors.size() + " errors from " + file.getName());
             } catch (Exception e) {
                 plugin.getLogger().log(Level.SEVERE, "Failed to load item file: " + file.getName(), e);
             }
         }
     }
 
-    private List<ShopItem> loadItemsFromFile(FileConfiguration config, String fileName) {
+
+    private Map<String, Object> loadItemsFromFile(FileConfiguration config, String fileName) {
         List<ShopItem> items = new ArrayList<>();
+        List<ShopError> errors = new ArrayList<>();
 
         for (String key : config.getKeys(false)) {
             ConfigurationSection itemData = config.getConfigurationSection(key);
-            if (itemData == null) continue;
+            if (itemData == null) {
+                errors.add(new ShopError(key, "Missing configuration section", fileName, -1));
+                continue;
+            }
 
             try {
                 ShopItem item = loadItem(key, itemData);
                 items.add(item);
             } catch (Exception e) {
+                int line = extractLineNumber(e, fileName);
+                errors.add(new ShopError(key, e.getMessage(), fileName, line));
                 plugin.getLogger().warning("Failed to load item '" + key + "' in file '" + fileName + "': " + e.getMessage());
             }
         }
 
-        return items;
+        Map<String, Object> results = new HashMap<>();
+        results.put("items", items);
+        results.put("errors", errors);
+        return results;
     }
 
     private ShopItem loadItem(String key, ConfigurationSection itemData) {
@@ -108,14 +122,29 @@ public class ItemManager {
 
         java.util.List<String> lore = itemData.getStringList("lore");
 
-        return new ShopItem(
-                key, material, displayName, lore, slot, page, amount,
-                buyPrice, sellPrice, stock, customModelData
-        );
+        return new ShopItem(key, material, displayName, lore, slot, page, amount,
+                buyPrice, sellPrice, stock, customModelData);
+    }
+
+
+    private int extractLineNumber(Exception e, String fileName) {
+        String msg = e.getMessage();
+        if (msg != null && msg.contains("line")) {
+            try {
+                return Integer.parseInt(msg.replaceAll("[^0-9]", ""));
+            } catch (NumberFormatException ex) {
+                return -1;
+            }
+        }
+        return -1;
     }
 
     public List<ShopItem> getItemsForSection(String sectionFileName) {
         return itemCache.getOrDefault(sectionFileName, new ArrayList<>());
+    }
+
+    public List<ShopError> getErrorsForSection(String sectionFileName) {
+        return errorCache.getOrDefault(sectionFileName, new ArrayList<>());
     }
 
     public void reload() {

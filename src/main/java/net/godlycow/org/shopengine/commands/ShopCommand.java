@@ -2,19 +2,27 @@ package net.godlycow.org.shopengine.commands;
 
 import net.godlycow.org.shopengine.ShopEngine;
 import net.godlycow.org.shopengine.gui.HistoryGUI;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class ShopCommand implements CommandExecutor {
+public class ShopCommand implements CommandExecutor, TabCompleter {
+
     private final ShopEngine plugin;
+    private final List<String> mainArgs = Arrays.asList(
+            "reload", "resetprice", "balance", "help", "history"
+    );
+
+    private final List<String> reloadArgs = Arrays.asList(
+            "all", "config", "messages", "sections", "items"
+    );
 
     public ShopCommand(ShopEngine plugin) {
         this.plugin = plugin;
+
+        PluginCommand shop = plugin.getCommand("shop");
+        if (shop != null) shop.setTabCompleter(this);
     }
 
     @Override
@@ -29,7 +37,6 @@ public class ShopCommand implements CommandExecutor {
             return true;
         }
         plugin.incrementShopCommand();
-
 
         switch (args[0].toLowerCase()) {
             case "reload" -> handleReload(sender, args);
@@ -48,6 +55,33 @@ public class ShopCommand implements CommandExecutor {
 
         return true;
     }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        List<String> completions = new ArrayList<>();
+        if (args.length == 1) {
+            for (String s : mainArgs) {
+                if (s.startsWith(args[0].toLowerCase())) {
+                    completions.add(s);
+                }
+            }
+            return completions;
+        }
+        if (args.length == 2 && args[0].equalsIgnoreCase("reload")) {
+            for (String r : reloadArgs) {
+                if (r.startsWith(args[1].toLowerCase())) {
+                    completions.add(r);
+                }
+            }
+            return completions;
+        }
+
+        if (args.length == 2 && args[0].equalsIgnoreCase("resetprice")) {
+            return completions;
+        }
+        return Collections.emptyList();
+    }
+
 
     private void handleReload(CommandSender sender, String[] args) {
         if (!sender.hasPermission("shopengine.reload")) {

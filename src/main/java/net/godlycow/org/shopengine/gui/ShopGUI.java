@@ -2,6 +2,7 @@ package net.godlycow.org.shopengine.gui;
 
 import net.godlycow.org.shopengine.ShopEngine;
 import net.godlycow.org.shopengine.player.Transaction;
+import net.godlycow.org.shopengine.shop.ShopError;
 import net.godlycow.org.shopengine.shop.ShopItem;
 import net.godlycow.org.shopengine.shop.ShopSection;
 import net.godlycow.org.shopengine.shop.StockManager;
@@ -17,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ShopGUI implements InventoryHolder {
@@ -28,6 +30,9 @@ public class ShopGUI implements InventoryHolder {
     private final Map<Integer, ShopItem> clickableItems = new HashMap<>();
     private static final int CONTENT_SLOTS = 45;
     private static final int NAV_ROW_START = 45;
+
+    private final Map<Integer, ShopError> errorItems = new HashMap<>();
+
 
     public ShopGUI(ShopEngine plugin, Player player, ShopSection section, int page) {
         this.plugin = plugin;
@@ -52,6 +57,7 @@ public class ShopGUI implements InventoryHolder {
 
     private void initialize() {
         clickableItems.clear();
+        errorItems.clear();
 
         if (section == null) {
             for (ShopSection shopSection : plugin.getShopManager().getSections().values()) {
@@ -64,10 +70,12 @@ public class ShopGUI implements InventoryHolder {
                 }
             }
         } else {
-            for (ShopItem item : section.getItems()) {
+            List<ShopItem> items = section.getItems();
+            List<ShopError> errors = plugin.getItemManager().getErrorsForSection(section.getKey()); // Get errors
+
+            for (ShopItem item : items) {
                 if (item.getPage() == currentPage) {
                     plugin.getStockManager().initializeStock(item);
-
                     double buyPrice = plugin.getDynamicPricingManager().getDynamicPrice(item, true);
                     double sellPrice = plugin.getDynamicPricingManager().getDynamicPrice(item, false);
                     int currentStock = plugin.getStockManager().getCurrentStock(item);
@@ -129,6 +137,21 @@ public class ShopGUI implements InventoryHolder {
 
                     inventory.setItem(item.getSlot(), itemBuilder.build());
                     clickableItems.put(item.getSlot(), item);
+                }
+            }
+
+            for (ShopError error : errors) {
+                if (error.getPage() == currentPage) {
+                    ItemBuilder errorBuilder = new ItemBuilder(plugin, Material.BARRIER)
+                            .name(error.getDisplayName())
+                            .amount(1);
+
+                    for (String loreLine : error.getLore()) {
+                        errorBuilder.lore(loreLine);
+                    }
+
+                    inventory.setItem(error.getSlot(), errorBuilder.build());
+                    errorItems.put(error.getSlot(), error);
                 }
             }
         }
@@ -210,6 +233,20 @@ public class ShopGUI implements InventoryHolder {
         if (event.getCurrentItem() == null) return;
 
         int slot = event.getSlot();
+
+
+        ShopError error = errorItems.get(slot);
+        if (error != null) {
+            player.sendMessage(plugin.getMiniMessage().deserialize(
+                    "<red>Configuration Error in " + error.getConfigFile() +
+                            "<gray>Line " + error.getLineNumber() +
+                            "<red>: " + error.getErrorMessage()
+            ));
+            player.sendMessage(plugin.getMiniMessage().deserialize(
+                    "<yellow>Please fix the config and run /shopadmin reload"
+            ));
+            return;
+        }
 
         if (slot == NAV_ROW_START) {
             if (currentPage > 0) {

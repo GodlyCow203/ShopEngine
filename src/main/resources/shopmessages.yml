@@ -47,6 +47,7 @@ gui:
     back-title: "<red>← Back"
     back-button: "<gray>Return to main menu"
     filler: "<gray>•"
+    error-item: "<#FF0000><bold>CONFIG ERROR - Click for details"
 
   search:
     title: "<gradient:#00ff00:#00ffff>Search: '<term>'</gradient>"
