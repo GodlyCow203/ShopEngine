@@ -2,7 +2,6 @@ package net.godlycow.org.shopengine.gui;
 
 import net.godlycow.org.shopengine.ShopEngine;
 import net.godlycow.org.shopengine.player.Transaction;
-import net.godlycow.org.shopengine.shop.ShopError;
 import net.godlycow.org.shopengine.shop.ShopItem;
 import net.godlycow.org.shopengine.shop.ShopSection;
 import net.godlycow.org.shopengine.shop.StockManager;
@@ -31,7 +30,6 @@ public class ShopGUI implements InventoryHolder {
     private static final int CONTENT_SLOTS = 45;
     private static final int NAV_ROW_START = 45;
 
-    private final Map<Integer, ShopError> errorItems = new HashMap<>();
 
 
     public ShopGUI(ShopEngine plugin, Player player, ShopSection section, int page) {
@@ -57,7 +55,6 @@ public class ShopGUI implements InventoryHolder {
 
     private void initialize() {
         clickableItems.clear();
-        errorItems.clear();
 
         if (section == null) {
             for (ShopSection shopSection : plugin.getShopManager().getSections().values()) {
@@ -71,7 +68,6 @@ public class ShopGUI implements InventoryHolder {
             }
         } else {
             List<ShopItem> items = section.getItems();
-            List<ShopError> errors = plugin.getItemManager().getErrorsForSection(section.getKey()); // Get errors
 
             for (ShopItem item : items) {
                 if (item.getPage() == currentPage) {
@@ -140,20 +136,6 @@ public class ShopGUI implements InventoryHolder {
                 }
             }
 
-            for (ShopError error : errors) {
-                if (error.getPage() == currentPage) {
-                    ItemBuilder errorBuilder = new ItemBuilder(plugin, Material.BARRIER)
-                            .name(error.getDisplayName())
-                            .amount(1);
-
-                    for (String loreLine : error.getLore()) {
-                        errorBuilder.lore(loreLine);
-                    }
-
-                    inventory.setItem(error.getSlot(), errorBuilder.build());
-                    errorItems.put(error.getSlot(), error);
-                }
-            }
         }
 
         addNavigationButtons();
@@ -235,18 +217,6 @@ public class ShopGUI implements InventoryHolder {
         int slot = event.getSlot();
 
 
-        ShopError error = errorItems.get(slot);
-        if (error != null) {
-            player.sendMessage(plugin.getMiniMessage().deserialize(
-                    "<red>Configuration Error in " + error.getConfigFile() +
-                            "<gray>Line " + error.getLineNumber() +
-                            "<red>: " + error.getErrorMessage()
-            ));
-            player.sendMessage(plugin.getMiniMessage().deserialize(
-                    "<yellow>Please fix the config and run /shopadmin reload"
-            ));
-            return;
-        }
 
         if (slot == NAV_ROW_START) {
             if (currentPage > 0) {

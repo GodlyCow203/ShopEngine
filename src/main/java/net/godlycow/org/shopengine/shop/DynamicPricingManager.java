@@ -42,19 +42,17 @@ public class DynamicPricingManager {
         double currentMultiplier = dynamicMultipliers.getOrDefault(key, 1.0);
         double fluctuation = plugin.getConfigManager().getDynamicFluctuationPercent() / 100.0;
 
-        // FIXED: Buying increases price, selling decreases price
         double change = isBuy ? fluctuation * amount * 0.01 : -fluctuation * amount * 0.01;
         double newMultiplier = Math.max(0.1, Math.min(3.0, currentMultiplier + change));
 
         dynamicMultipliers.put(key, newMultiplier);
 
-        // FIXED: Correct string formatting - all formatters match their types
         plugin.getLogger().fine(String.format("Price for %s changed from %.2fx to %.2fx (%s %d)",
-                key,                    // %s (String)
-                currentMultiplier,      // %.2f (double)
-                newMultiplier,          // %.2f (double)
-                isBuy ? "bought" : "sold", // %s (String)
-                amount));               // %d (int)
+                key,
+                currentMultiplier,
+                newMultiplier,
+                isBuy ? "bought" : "sold",
+                amount));
     }
 
     public void dailyUpdate() {
@@ -106,11 +104,10 @@ public class DynamicPricingManager {
     }
 
     private void startSaveTask() {
-        long interval = plugin.getConfigManager().getSaveIntervalMinutes() * 1200L; // Convert to ticks
+        long interval = plugin.getConfigManager().getSaveIntervalMinutes() * 1200L;
         plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, this::savePrices, interval, interval);
 
-        // Daily update task
-        plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, this::dailyUpdate, 72000L, 72000L); // Every hour check
+        plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, this::dailyUpdate, 72000L, 72000L);
     }
 
     public Map<String, Double> getMultipliers() {

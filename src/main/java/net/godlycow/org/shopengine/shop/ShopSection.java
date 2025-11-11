@@ -44,7 +44,6 @@ public class ShopSection {
         return items;
     }
 
-    // Helper method for getting item by slot AND page
     public ShopItem getItem(int slot, int page) {
         for (ShopItem item : items) {
             if (item.getSlot() == slot && item.getPage() == page) {

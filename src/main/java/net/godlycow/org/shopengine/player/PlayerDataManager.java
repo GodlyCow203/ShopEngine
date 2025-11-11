@@ -9,94 +9,122 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.*;
 
 public class PlayerDataManager {
+
     private final ShopEngine plugin;
     private final File dataFolder;
-    private final Map<UUID, PlayerData> cache = new ConcurrentHashMap<>();
+
+    private final ConcurrentHashMap<UUID, PlayerData> cache = new ConcurrentHashMap<>();
+
+    private final ExecutorService saveExecutor =
+            Executors.newSingleThreadExecutor(r -> {
+                Thread t = new Thread(r, "ShopEngine-PlayerDataSave");
+                t.setDaemon(true);
+                return t;
+            });
 
     public PlayerDataManager(ShopEngine plugin) {
         this.plugin = plugin;
         this.dataFolder = new File(plugin.getDataFolder(), "playerdata");
-        if (!dataFolder.exists()) {
+        if (!dataFolder.exists())
             dataFolder.mkdirs();
-        }
+
         plugin.getLogger().info("PlayerDataManager initialized!");
     }
 
+
+
     public PlayerData getPlayerData(Player player) {
-        return cache.computeIfAbsent(player.getUniqueId(), uuid -> loadData(player));
+        return cache.computeIfAbsent(player.getUniqueId(), uuid -> loadData(uuid));
     }
 
-    private PlayerData loadData(Player player) {
-        File file = new File(dataFolder, player.getUniqueId() + ".yml");
-        PlayerData data = new PlayerData(player.getUniqueId());
+    private PlayerData loadData(UUID uuid) {
+        File file = new File(dataFolder, uuid + ".yml");
+        PlayerData data = new PlayerData(uuid);
 
-        if (!file.exists()) return data;
+        if (!file.exists())
+            return data;
 
         try {
             FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
-            if (config.contains("transactions")) {
-                List<Map<?, ?>> transactions = config.getMapList("transactions");
-                for (Map<?, ?> map : transactions) {
+            List<Map<?, ?>> rawTx = config.getMapList("transactions");
+            if (rawTx != null) {
+                for (Map<?, ?> map : rawTx) {
                     try {
                         Material material = Material.valueOf((String) map.get("material"));
-                        int amount = (Integer) map.get("amount");
-                        double price = (Double) map.get("price");
+                        int amount = ((Number) map.get("amount")).intValue();
+                        double price = ((Number) map.get("price")).doubleValue();
                         boolean isBuy = (Boolean) map.get("isBuy");
                         long timestamp = ((Number) map.get("timestamp")).longValue();
-                        Transaction transaction = new Transaction(material, amount, price, isBuy);
-                        data.addTransaction(transaction);
-                    } catch (Exception e) {
-                        plugin.getLogger().warning("Failed to load transaction for " + player.getName());
-                    }
+                        data.addTransaction(new Transaction(material, amount, price, isBuy ));
+                    } catch (Exception ignored) {}
                 }
             }
+
         } catch (Exception e) {
-            plugin.getLogger().warning("Failed to load player data for " + player.getName());
+            plugin.getLogger().warning("Failed to load player data for " + uuid);
         }
 
         return data;
     }
 
+
+
     public void saveData(Player player) {
-        PlayerData data = cache.get(player.getUniqueId());
+        UUID uuid = player.getUniqueId();
+        PlayerData data = cache.get(uuid);
         if (data == null) return;
 
-        CompletableFuture.runAsync(() -> {
-            File file = new File(dataFolder, player.getUniqueId() + ".yml");
-            FileConfiguration config = new YamlConfiguration();
-            List<Map<String, Object>> transactions = new ArrayList<>();
-            for (Transaction transaction : data.getTransactions()) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("material", transaction.getMaterial().name());
-                map.put("amount", transaction.getAmount());
-                map.put("price", transaction.getPrice());
-                map.put("isBuy", transaction.isBuy());
-                map.put("timestamp", transaction.getTimestamp());
-                transactions.add(map);
-            }
-            config.set("transactions", transactions);
-
-            try {
-                config.save(file);
-            } catch (IOException e) {
-                plugin.getLogger().warning("Failed to save data for " + player.getName());
-            }
-        });
+        saveExecutor.submit(() -> saveToFile(uuid, data));
     }
+
+    private void saveToFile(UUID uuid, PlayerData data) {
+        File file = new File(dataFolder, uuid + ".yml");
+        FileConfiguration config = new YamlConfiguration();
+
+        List<Map<String, Object>> txList = new ArrayList<>(data.transactions.size());
+        for (Transaction t : data.transactions) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("material", t.getMaterial().name());
+            map.put("amount", t.getAmount());
+            map.put("price", t.getPrice());
+            map.put("isBuy", t.isBuy());
+            map.put("timestamp", t.getTimestamp());
+            txList.add(map);
+        }
+        config.set("transactions", txList);
+
+        try {
+            config.save(file);
+        } catch (IOException e) {
+            plugin.getLogger().warning("Failed to save data for " + uuid);
+        }
+    }
+
 
     public void saveAll() {
-        cache.keySet().forEach(uuid -> {
-            Player player = plugin.getServer().getPlayer(uuid);
-            if (player != null && player.isOnline()) {
-                saveData(player);
+        CountDownLatch latch = new CountDownLatch(cache.size());
+        for (UUID uuid : cache.keySet()) {
+            PlayerData data = cache.get(uuid);
+            if (data != null) {
+                saveExecutor.submit(() -> {
+                    saveToFile(uuid, data);
+                    latch.countDown();
+                });
+            } else {
+                latch.countDown();
             }
-        });
+        }
+
+        try {
+            latch.await(3, TimeUnit.SECONDS);
+        } catch (InterruptedException ignored) {}
     }
+
+
 
     public void recordTransaction(Player player, Transaction transaction) {
         PlayerData data = getPlayerData(player);
@@ -106,7 +134,10 @@ public class PlayerDataManager {
 
     public static class PlayerData {
         private final UUID uuid;
-        private final List<Transaction> transactions = new ArrayList<>();
+
+        private final Deque<Transaction> transactions = new ArrayDeque<>();
+
+        private static final int MAX = 100;
 
         public PlayerData(UUID uuid) {
             this.uuid = uuid;
@@ -116,17 +147,16 @@ public class PlayerDataManager {
             return new ArrayList<>(transactions);
         }
 
-        public void addTransaction(Transaction transaction) {
-            transactions.add(transaction);
-            if (transactions.size() > 100) {
-                transactions.remove(0);
-            }
+        public void addTransaction(Transaction t) {
+            if (transactions.size() >= MAX)
+                transactions.removeFirst();
+            transactions.addLast(t);
         }
 
         public List<Transaction> getRecentTransactions(int limit) {
-            List<Transaction> recent = new ArrayList<>(transactions);
-            Collections.reverse(recent);
-            return recent.subList(0, Math.min(limit, recent.size()));
+            List<Transaction> reversed = new ArrayList<>(transactions);
+            Collections.reverse(reversed);
+            return reversed.subList(0, Math.min(limit, reversed.size()));
         }
     }
 }

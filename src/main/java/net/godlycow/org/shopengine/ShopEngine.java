@@ -7,6 +7,7 @@ import net.godlycow.org.shopengine.config.MessageManager;
 import net.godlycow.org.shopengine.config.SectionManager;
 import net.godlycow.org.shopengine.economy.EconomyManager;
 import net.godlycow.org.shopengine.listeners.ShopListener;
+import net.godlycow.org.shopengine.listeners.UpdateNotifyListener;
 import net.godlycow.org.shopengine.metrics.Metrics;
 import net.godlycow.org.shopengine.player.PlayerDataManager;
 import net.godlycow.org.shopengine.shop.DynamicPricingManager;
@@ -17,11 +18,19 @@ import net.godlycow.org.shopengine.utils.SignInputManager;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
 
 public final class ShopEngine extends JavaPlugin {
     private static ShopEngine instance;
     private MiniMessage miniMessage;
+
     private ConfigManager configManager;
     private MessageManager messageManager;
     private SectionManager sectionManager;
@@ -32,10 +41,12 @@ public final class ShopEngine extends JavaPlugin {
     private PlayerDataManager playerDataManager;
     private SignInputManager signInputManager;
     private StockManager stockManager;
+    private SpigotMCUpdateChecker updateChecker;
+
+
     private Metrics metrics;
-    private int shopCommandCount = 0;
 
-
+    private final AtomicInteger shopCommandAtomic = new AtomicInteger(0);
 
     @Override
     public void onEnable() {
@@ -43,64 +54,108 @@ public final class ShopEngine extends JavaPlugin {
         miniMessage = MiniMessage.miniMessage();
 
         saveDefaultConfig();
-        configManager = new ConfigManager(this);
+        saveResource("help.yml", false);
 
-        messageManager = new MessageManager(this);
-        sectionManager = new SectionManager(this);
-        itemManager = new ItemManager(this);
-        playerDataManager = new PlayerDataManager(this);
-        signInputManager = new SignInputManager(this);
-        stockManager = new StockManager();
-        new SpigotMCUpdateChecker(this, 130057).checkForUpdates();
+        CompletableFuture.runAsync(() -> new SpigotMCUpdateChecker(this).checkForUpdates());
 
+        try {
+            configManager = new ConfigManager(this);
+            messageManager = new MessageManager(this);
+            sectionManager = new SectionManager(this);
 
-        registerMetrics();
-        startSpigotUpdateChecker();
+            itemManager = new ItemManager(this);
+            shopManager = new ShopManager(this);
+            stockManager = new StockManager();
 
+            playerDataManager = new PlayerDataManager(this);
+            signInputManager = new SignInputManager(this);
+
+        } catch (Throwable t) {
+            getLogger().log(Level.SEVERE, "Critical failure while loading core managers", t);
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
 
         if (!setupEconomy()) {
             getLogger().severe("No Vault-supported economy plugin found!");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        saveResource("help.yml", false);
 
+        updateChecker = new SpigotMCUpdateChecker(this);
 
-        dynamicPricingManager = new DynamicPricingManager(this);
-        shopManager = new ShopManager(this);
-
-        getCommand("shop").setExecutor(new ShopCommand(this));
+        CompletableFuture.runAsync(this::initMetricsSafe);
+        CompletableFuture.runAsync(() -> {
+            updateChecker.checkForUpdates();
+        });
+        Objects.requireNonNull(getCommand("shop")).setExecutor(new ShopCommand(this));
         getServer().getPluginManager().registerEvents(new ShopListener(this), this);
 
-        getLogger().info("ShopEngine has been enabled!");
+        getLogger().info("ShopEngine has been enabled (optimized startup)");
         getLogger().info("Dynamic Pricing: " + (configManager.isDynamicPricingEnabled() ? "ENABLED" : "DISABLED"));
 
-    }
+        Bukkit.getPluginManager().registerEvents(
+                new UpdateNotifyListener(updateChecker),
+                this
+        );
 
+    }
 
     @Override
     public void onDisable() {
-        if (dynamicPricingManager != null) dynamicPricingManager.savePrices();
-        if (economyManager != null) economyManager.cleanup();
-        if (playerDataManager != null) playerDataManager.saveAll();
-        getLogger().info("ShopEngine has been disabled!");
+        try {
+            if (dynamicPricingManager != null) dynamicPricingManager.savePrices();
+        } catch (Throwable t) {
+            getLogger().log(Level.WARNING, "Error while saving dynamic prices", t);
+        }
+
+        try {
+            if (economyManager != null) economyManager.cleanup();
+        } catch (Throwable t) {
+            getLogger().log(Level.WARNING, "Error while cleaning up economy manager", t);
+        }
+
+        try {
+            if (playerDataManager != null) playerDataManager.saveAll();
+        } catch (Throwable t) {
+            getLogger().log(Level.WARNING, "Error while saving player data", t);
+        }
+
+        getLogger().info("ShopEngine has been disabled");
     }
+
+
+
 
     private boolean setupEconomy() {
         economyManager = new EconomyManager(this);
         return economyManager.setup();
     }
-    private void registerMetrics() {
-        int pluginId = 27920;
-        metrics = new Metrics(this, pluginId);
 
-        metrics.addCustomChart(new Metrics.SingleLineChart("shop_command_usage", () -> shopCommandCount));
+    private void initMetricsSafe() {
+        try {
+            int pluginId = 27920;
+            Metrics localMetrics = new Metrics(this, pluginId);
+            localMetrics.addCustomChart(new Metrics.SingleLineChart("shop_command_usage", shopCommandAtomic::get));
+            this.metrics = localMetrics;
+        } catch (Throwable t) {
+            Bukkit.getScheduler().runTask(this, () -> getLogger().log(Level.WARNING, "Failed to initialize metrics", t));
+        }
     }
+
+    public void deferredLoad(Runnable task) {
+        Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
+            try {
+                task.run();
+            } catch (Throwable t) {
+                Bukkit.getScheduler().runTask(this, () -> getLogger().log(Level.WARNING, "Deferred load task failed", t));
+            }
+        });
+    }
+
     public void incrementShopCommand() {
-        shopCommandCount++;
+        shopCommandAtomic.incrementAndGet();
     }
-
-
 
 
     public static ShopEngine getInstance() { return instance; }
@@ -115,27 +170,4 @@ public final class ShopEngine extends JavaPlugin {
     public PlayerDataManager getPlayerDataManager() { return playerDataManager; }
     public SignInputManager getSignInputManager() { return signInputManager; }
     public StockManager getStockManager() { return stockManager; }
-
-    private void startSpigotUpdateChecker() {
-        int resourceId = 130075;
-        SpigotMCUpdateChecker checker = new SpigotMCUpdateChecker(this, resourceId);
-
-        Bukkit.getScheduler().runTaskTimerAsynchronously(
-                this,
-                () -> checker.getLatestVersion(latest -> {
-                    String current = getDescription().getVersion();
-
-                    if (!latest.equalsIgnoreCase(current)) {
-                        getLogger().warning("==================================================");
-                        getLogger().warning(" A new version of ShopEngine is available!");
-                        getLogger().warning(" Current: " + current);
-                        getLogger().warning(" Latest:  " + latest);
-                        getLogger().warning(" Download: https://www.spigotmc.org/resources/" + resourceId + "/");
-                        getLogger().warning("==================================================");
-                    }
-                }),
-                20L,
-                1200L
-        );
-    }
 }

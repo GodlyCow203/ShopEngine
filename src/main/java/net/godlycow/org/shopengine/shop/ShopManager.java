@@ -26,10 +26,9 @@ public class ShopManager {
             String sectionKey = entry.getKey();
             ShopSection section = entry.getValue();
 
-            // Load ALL items for this section
             List<ShopItem> items = plugin.getItemManager().getItemsForSection(sectionKey);
             section.getItems().clear();
-            section.getItems().addAll(items); // Add all items to list
+            section.getItems().addAll(items);
 
             sections.put(sectionKey, section);
         }
@@ -52,11 +51,10 @@ public class ShopManager {
         return new HashMap<>(sections);
     }
 
-    // FIXED: Changed from .values() to direct addAll since getItems() returns List
     public List<ShopItem> getAllItems() {
         List<ShopItem> allItems = new ArrayList<>();
         for (ShopSection section : sections.values()) {
-            allItems.addAll(section.getItems()); // Directly add the List
+            allItems.addAll(section.getItems());
         }
         return allItems;
     }
